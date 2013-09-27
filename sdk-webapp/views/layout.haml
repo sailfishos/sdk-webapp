@@ -31,6 +31,10 @@
             %li.tab{:class => tab == :sdk ? "current_tab" :"" }
               .li
                 = _ :sdk
+          %a(href="/#{@language}/register_sdk/")
+            %li.tab{:class => tab == :register_sdk ? "current_tab" :"" }
+              .li
+                = _ :register_sdk
       #name_wrap
         #logo
         #page_name
