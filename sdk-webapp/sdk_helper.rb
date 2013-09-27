@@ -5,6 +5,7 @@ require './toolchains.rb'
 require './engine.rb'
 require './process.rb'
 require './flash.rb'
+require './registrator.rb'
 
 I18n::Backend::Simple.send(:include, I18n::Backend::Translate)
 I18n::Backend::Simple.send(:include, I18n::Backend::TS)
@@ -25,6 +26,7 @@ class SdkHelper < Sinatra::Base
     pass if request.path_info =~ /\.css$/
     Engine.load
     Target.load
+    Registrator.load
   end
 
   get "/index.css" do
@@ -35,6 +37,7 @@ class SdkHelper < Sinatra::Base
   get '/toolchains/' do redirect to "/"+system_language+"/toolchains/"; end
   get '/targets/' do redirect to "/"+system_language+"/targets/"; end
   get '/updates/' do redirect to "/"+system_language+"/updates/"; end
+  get '/register_sdk/' do redirect to "/"+system_language+"/register_sdk/"; end
 
 
   get '/:locale/' do
@@ -42,6 +45,24 @@ class SdkHelper < Sinatra::Base
     CCProcess.tail_update
     haml :index, :locals => { :tab => :sdk }
   end
+
+# register_sdk 
+  get '/:locale/register_sdk/' do
+    locale_set
+    CCProcess.tail_update
+    haml :register_sdk, :locals => { :tab => :register_sdk }
+  end
+
+  post '/:locale/register_sdk/do_register' do
+    CCProcess.tail_update    
+    name = params[:username]
+    pass = params[:password]
+
+    registrator = Registrator.new(name, pass)
+    registrator.register
+  
+  end
+
 
 # updates  
   get '/:locale/updates/' do
