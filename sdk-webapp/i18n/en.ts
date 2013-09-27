@@ -390,7 +390,7 @@
   <name>Targets_body</name>
   <message>
     <source>Targets_body</source>
-    <translation>The following targets have updates available which should be applied.</translation>
+    <translation>Any updates for the following targets should be applied.</translation>
   </message>
 </context>
 <context>
@@ -418,7 +418,7 @@
   <name>Emulators_body</name>
   <message>
     <source>Emulators_body</source>
-    <translation>The following emulators have updates available which should be applied</translation>
+    <translation>Any updates for the following emulators should be applied.</translation>
   </message>
 </context>
 <context>
