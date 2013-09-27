@@ -1,0 +1,80 @@
+!!!
+%html  
+  %head  
+    %title
+      = _ :page_title
+    %link(href="/index.css" media="all" rel="stylesheet" type="text/css")
+    - if CCProcess.refresh_time
+      %meta{'http-equiv' =>'refresh', 'content' => "#{CCProcess.refresh_time}" }
+    %link(href="/css/fonts.css" rel="stylesheet" type="text/css")
+    %script{src: "http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"}
+    %script{src: "/filter.js"}
+    %script{src: "/count.js"}
+    %script{src: "/hover.js"}
+  %body
+    .page_bar_wrap
+      #page_bar
+        %ul#page_menu
+          %a(href="/#{@language}/targets/")
+            %li.tab{:class => tab == :targets ? "current_tab" :"" }
+              .li
+                = _ :targets
+          %a(href="/#{@language}/toolchains/")
+            %li.tab{:class => tab == :toolchains ? "current_tab" :"" }
+              .li
+                = _ :toolchains
+          %a(href="/#{@language}/updates/")
+            %li.tab{:class => tab == :updates ? "current_tab" :"" }
+              .li
+                = _ :updates
+          -# %a(href="/#{@language}/")
+            %li.tab{:class => tab == :sdk ? "current_tab" :"" }
+              .li
+                = _ :sdk
+      #name_wrap
+        #logo
+        #page_name
+          = _ :page_name
+    .wrapper
+      .content_wrap
+        =yield
+      - if CCProcess.exists
+        .progress_blocker
+          .progress
+            .progress_background
+              #progress_view
+                %table(class="progress_table #{CCProcess.result_class}")
+                  %tbody
+                    %tr
+                      %td
+                        - if ! CCProcess.is_running
+                          %form{:action => "/actions/clear_output", :method => "post"}
+                            %input{:type => "submit", :value => (_ :clear_progress), :class => "button"}
+                        - if CCProcess.refresh_time
+                          Update log in
+                          %b#countdown
+                          :javascript
+                            $("#countdown").countdown(#{CCProcess.refresh_time}, "s");
+                        .progress_header
+                          = _ :operation_progress
+                    %tr
+                      %td
+                        .monospace
+                        #{CCProcess.status_out}
+      - if Flash.active
+        .flash_blocker#flash_display
+          .flash#flash_view
+            .flash_header
+              = _ :flash_heading
+            - Flash.each do |message, importance|
+              .monospace
+                #{message}
+              %hr
+            = _ :click_to_acknowledge_flash
+          :javascript
+            $("#flash_view").click(function () {
+            $("#flash_display").hide()
+            });
+
+
+

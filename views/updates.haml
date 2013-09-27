@@ -1,0 +1,116 @@
+.content
+  .page_header
+    = _ :manage_sdk
+  #sdk_management
+
+    = _ "Version and update status"
+
+    = _ "Version_summary"
+
+  #engine_wrap.update_section
+    %h1= _ "Engine"
+
+    - if Engine.update_available?
+      %form{:action => "/#{@language}/updates/engine", :method => "post"}
+        %input{:type => "submit", :value => (_ "Update Engine"), :class => "button", :name=> "_method", :id => "engine_update"}
+      #engine_update_details.update_details
+        Update Details
+        %pre
+          = preserve do
+            :escaped
+              #{Engine.update_info}
+        :javascript
+          $("#engine_update").show_info($("#engine_update_details"));
+          $("#engine_update_details").show_info($("#engine_update_details"));
+    - else
+      = _ "Uptodate"
+    .clear
+
+
+  #target_wrap.update_section
+    %h1= _ "Targets"
+    = _"Targets_body"
+
+    %table
+      - Target.each do |target|
+        %tr
+          %td
+            #{target.name}
+            %td
+              - if target.update_available?
+                %form{:action => "/#{@language}/targets/#{target.name}/update", :method => "post"}
+                  %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "t#{target.id}_update"}
+                %div.update_details{:id => "t#{target.id}_update_details"}
+                  Update Details
+                  %pre
+                    = preserve do
+                      :escaped
+                        #{target.update_info}
+                  :javascript
+                    $("#t#{target.id}_update").show_info($("#t#{target.id}_update_details"));
+                    $("#t#{target.id}_update_details").show_info($("#t#{target.id}_update_details"));
+                .clear
+              - else
+                = _ "Uptodate"
+
+  -# #emulator_wrap.update_section
+    %h1= _ "Emulators"
+
+    = _"Emulators_body"
+
+  #provider_wrap.update_section
+    %h1= _ "Providers"
+    = _"Providers_body"
+
+    #provider_list
+      %table
+        %tr
+          %td
+            = _ "provider_name"
+          %td
+            = _ "provider_url"
+          %td
+            = _ "provider_status"
+          %td
+
+        - Provider.each do |provider|
+          %tr
+            %td
+              #{provider.name}
+            %td
+              (#{provider.url})
+            %td
+              - if provider.success
+                OK
+              - else
+                Not OK
+            %td
+              %form{:action => "/#{@language}/provider/#{provider.id}", :method => "post"}
+                %input{:type => "submit", :value => (_ :delete), :class => "button", :name=> "_method"}
+
+    %span#provider_control.button_link
+      = _ "New Provider"
+
+    #provider_add
+      %form{:action => "/#{@language}/provider/add", :method => 'post'}
+        .parameter.parameter_name
+          %label
+            = _ :provider_name
+          .clear
+          %input#text_field1{:type => 'text', :name => 'provider_name', :value => @provider_name, :class=> "button parameter_text_field"}
+
+        
+        .parameter.parameter_name
+          %label
+            = _ :provider_url
+          .clear
+          %input#text_field2{:type => 'text', :name => 'provider_url', :value => @provider_url, :class=> "button parameter_text_field"}
+        .clear
+        .parameter.parameter_add_button
+          %input{:type => 'submit', :value => (_ :add), :class => 'button'}
+    :javascript
+      $("#provider_add").hide()
+      $("#provider_control").click(function () {
+        $("#provider_add").toggle()
+      });
+    .clear
