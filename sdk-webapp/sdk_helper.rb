@@ -54,13 +54,11 @@ class SdkHelper < Sinatra::Base
   end
 
   post '/:locale/register_sdk/do_register' do
-    CCProcess.tail_update    
     name = params[:username]
     pass = params[:password]
-
     registrator = Registrator.new(name, pass)
     registrator.register
-  
+    redirect to("/"+params[:locale]+'/register_sdk/')
   end
 
 

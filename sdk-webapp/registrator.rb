@@ -3,9 +3,6 @@ require './process.rb'
 
 class Registrator
 
-# some weird general parameters
-  UPDATE_VALID_PERIOD=7200
-
   def id
     return @id
   end
