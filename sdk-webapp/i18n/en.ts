@@ -2,6 +2,45 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_US" sourcelanguage="en">
 
+<!-- views/register_sdk.haml -->
+<context>
+    <name>register_sdk</name>
+    <message>
+        <source>register_sdk</source>
+        <translation>Register SDK</translation>
+    </message>
+</context>
+<context>
+    <name>username</name>
+    <message>
+        <source>username</source>
+        <translation>Username</translation>
+    </message>
+</context>
+<context>
+    <name>password</name>
+    <message>
+        <source>password</source>
+        <translation>Password</translation>
+    </message>
+</context>
+<context>
+    <name>do_register</name>
+    <message>
+        <source>do_register</source>
+        <translation>Register</translation>
+    </message>
+</context>
+<context>
+    <name>registering</name>
+    <message>
+        <source>registering</source>
+        <translation>Registering</translation>
+    </message>
+</context>
+
+<!-- views/register_sdk.haml -->
+
 <!-- views/index.haml -->
 <context>
     <name>manage_sdk</name>
