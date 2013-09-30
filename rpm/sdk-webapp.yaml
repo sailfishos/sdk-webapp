@@ -15,6 +15,7 @@ Requires:
   - sdk-webapp-bundle >= 0.4.0
   - sdk-webapp-customization >= 0.4.0-2
   - sdk-utils >= 0.57
+  - sdk-register >= 0.4
 Configure: none
 SetupOptions: -q -n %{name}-%{version}/%{name}
 Files:

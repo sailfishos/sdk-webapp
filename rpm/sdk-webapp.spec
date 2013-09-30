@@ -19,6 +19,7 @@ Source100:  sdk-webapp.yaml
 Requires:   sdk-webapp-bundle >= 0.4.0
 Requires:   sdk-webapp-customization >= 0.4.0-2
 Requires:   sdk-utils >= 0.57
+Requires:   sdk-register >= 0.4
 BuildRequires:  systemd
 
 %description
