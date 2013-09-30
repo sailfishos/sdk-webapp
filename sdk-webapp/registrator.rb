@@ -1,12 +1,16 @@
 require 'json'
 require './process.rb'
 
+
 def registration_visibility
 
-  domain="foo"
   regdomain=""
 
   domain=`sdk-register -d`
+
+  if domain == ""
+    return "none"
+  end
 
   regdomain=File.open( "/etc/ssu/reg_domain" ).first if File::exists?( "/etc/ssu/reg_domain" )
 
