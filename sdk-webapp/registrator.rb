@@ -3,18 +3,12 @@ require './process.rb'
 
 def registration_visibility
 
-  domain="foo",raw_domain="",
-  regdomain="", raw_regdomain=""
+  domain="foo"
+  regdomain=""
 
-  raw_domain=`sdk-register -d`
-  unless raw_domain == nil
-    domain=raw_domain[0,raw_domain.length-1]
-  end
-  
-  raw_regdomain=File.open( "/etc/ssu/reg_domain" ).first if File::exists?( "/etc/ssu/reg_domain" )
-  unless raw_regdomain == nil
-    regdomain=raw_regdomain[0,raw_domain.length-1]
-  end
+  domain=`sdk-register -d`
+
+  regdomain=File.open( "/etc/ssu/reg_domain" ).first if File::exists?( "/etc/ssu/reg_domain" )
 
   if domain==regdomain
     return "normal"
@@ -22,6 +16,7 @@ def registration_visibility
     return "none"
   end
 end
+
 
 class Registrator
 
