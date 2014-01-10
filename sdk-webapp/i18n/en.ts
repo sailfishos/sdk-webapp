@@ -2,6 +2,46 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_US" sourcelanguage="en">
 
+<!-- views/harbour_tools.haml -->
+<context>
+    <name>harbour_tools</name>
+    <message>
+        <source>harbour_tools</source>
+        <translation>Harbour Tools</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_summary</name>
+    <message>
+        <source>harbour_summary</source>
+        <translation>This page contains tools relevant to Jolla Harbour.</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_summary</name>
+    <message>
+        <source>rpm_validator_summary</source>
+        <translation>Use the the validator tool to do a quick smoke test for your application package before sending it to Harbour for acceptance.</translation>
+    </message>
+</context>
+<context>
+    <name>do_validate</name>
+    <message>
+        <source>do_validate</source>
+        <translation>Validate</translation>
+    </message>
+</context>
+<context>
+    <name>validating_rpm</name>
+    <message>
+        <source>validating_rpm</source>
+        <translation>Validating</translation>
+    </message>
+</context>
+
+<!-- views/harbour_tools.haml -->
+
+
 <!-- views/register_sdk.haml -->
 <context>
     <name>register_sdk</name>
@@ -104,7 +144,7 @@
     <name>flash_heading</name>
     <message>
         <source>flash_heading</source>
-        <translation>A problem occurred during that task</translation>
+        <translation>A problem occurred during this task</translation>
     </message>
 </context>
 <context>
@@ -126,6 +166,20 @@
     <message>
         <source>operation progress</source>
         <translation>Operation Progress</translation>
+    </message>
+</context>
+<context>
+    <name>operation_success</name>
+    <message>
+        <source>operation_success</source>
+        <translation>Operation Successful</translation>
+    </message>
+</context>
+<context>
+    <name>operation_failed</name>
+    <message>
+        <source>operation_failed</source>
+        <translation>Operation Failed</translation>
     </message>
 </context>
 
@@ -252,6 +306,13 @@
     <message>
         <source>add</source>
         <translation>add</translation>
+    </message>
+</context>
+<context>
+    <name>choose_rpm</name>
+    <message>
+        <source>choose_rpm</source>
+        <translation>Please choose an RPM file.</translation>
     </message>
 </context>
 <context>

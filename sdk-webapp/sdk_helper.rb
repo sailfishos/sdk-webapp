@@ -6,6 +6,7 @@ require './engine.rb'
 require './process.rb'
 require './flash.rb'
 require './registrator.rb'
+require './harbour-tools.rb'
 
 I18n::Backend::Simple.send(:include, I18n::Backend::Translate)
 I18n::Backend::Simple.send(:include, I18n::Backend::TS)
@@ -27,6 +28,7 @@ class SdkHelper < Sinatra::Base
     Engine.load
     Target.load
     Registrator.load
+    Harbour.load
   end
 
   get "/index.css" do
@@ -38,18 +40,19 @@ class SdkHelper < Sinatra::Base
   get '/targets/' do redirect to "/"+system_language+"/targets/"; end
   get '/updates/' do redirect to "/"+system_language+"/updates/"; end
   get '/register_sdk/' do redirect to "/"+system_language+"/register_sdk/"; end
+  get '/harbour_tools/' do redirect to "/"+system_language+"/harbour_tools/"; end
 
 
   get '/:locale/' do
     locale_set
-    CCProcess.tail_update
+    CCProcess.get_output
     haml :index, :locals => { :tab => :sdk }
   end
 
 # register_sdk 
   get '/:locale/register_sdk/' do
     locale_set
-    CCProcess.tail_update
+    CCProcess.get_output
     haml :register_sdk, :locals => { :tab => :register_sdk }
   end
 
@@ -61,11 +64,35 @@ class SdkHelper < Sinatra::Base
     redirect to("/"+params[:locale]+'/register_sdk/')
   end
 
+# harbour_tools
+  get '/:locale/harbour_tools/' do
+    locale_set
+    CCProcess.get_output(2, 0, 0)
+    haml :harbour_tools, :locals => { :tab => :harbour_tools }
+  end
+
+  post '/:locale/harbour_tools/validate_rpm' do
+    if (! params[:rpm_name].nil?)
+      fname = params[:rpm_name][:filename]
+      File.rename(params[:rpm_name][:tempfile], "/tmp/" + fname)
+      # TODO this limit is arbitrary
+      if File.size("/tmp/" + fname) > 50000000
+        Flash.to_user fname + " too large (" + File.size("/tmp/" + fname).to_s + ") bytes."
+        File.unlink("/tmp/" + fname)
+      else
+        validator = Harbour.new("harbour")
+        validator.validate("/tmp/" + fname, fname)
+      end
+    else
+      Flash.to_user _(:choose_rpm)
+    end
+    redirect to("/"+params[:locale]+'/harbour_tools/')
+  end
 
 # updates  
   get '/:locale/updates/' do
     locale_set
-    CCProcess.tail_update
+    CCProcess.get_output
     haml :updates, :locals => { :tab => :updates }
   end
 
@@ -91,7 +118,7 @@ class SdkHelper < Sinatra::Base
 
   get '/:locale/toolchains/' do
     locale_set
-    CCProcess.tail_update
+    CCProcess.get_output
     haml :toolchains, :locals => { :tab => :toolchains }
   end
 
@@ -120,21 +147,21 @@ class SdkHelper < Sinatra::Base
   #clear the operation progress output
   post '/actions/clear_output' do
     CCProcess.clear
-    CCProcess.tail_update  
+    CCProcess.get_output
     redirect to(request.referer)
   end
 
 # targets  
   get '/:locale/targets/' do
     locale_set
-    CCProcess.tail_update
+    CCProcess.get_output
     haml :targets, :locals => { :tab => :targets }
   end
 
   get '/:locale/targets/:target' do
     @target = params[:target]
     locale_set
-    CCProcess.tail_update
+    CCProcess.get_output
     packages_list_update
     haml :target, :locals => { :tab => :targets }
   end

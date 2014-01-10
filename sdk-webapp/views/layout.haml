@@ -14,6 +14,7 @@
   %body
     / Declare Variables
     - show_register = registration_visibility() 
+    - show_harbour = harbour_visibility()
 
     .page_bar_wrap
       #page_bar
@@ -34,6 +35,11 @@
             %li.tab{:class => tab == :sdk ? "current_tab" :"" }
               .li
                 = _ :sdk
+          %a(href="/#{@language}/harbour_tools/" )
+            #harbour_view
+            %li.tab{ :style=> "display:#{show_harbour}" , :class => tab == :harbour_view ? "current_tab" :"" }
+              .li
+                = _ :harbour_tools
           %a(href="/#{@language}/register_sdk/" )
             #register_view
             %li.tab{ :style=> "display:#{show_register}" , :class => tab == :register_sdk ? "current_tab" :"" }
@@ -48,27 +54,39 @@
         =yield
       - if CCProcess.exists
         .progress_blocker
-          .progress
-            .progress_background
-              #progress_view
-                %table(class="progress_table #{CCProcess.result_class}")
-                  %tbody
-                    %tr
-                      %td
-                        - if ! CCProcess.is_running
-                          %form{:action => "/actions/clear_output", :method => "post"}
-                            %input{:type => "submit", :value => (_ :clear_progress), :class => "button"}
-                        - if CCProcess.refresh_time
-                          Update log in
-                          %b#countdown
-                          :javascript
-                            $("#countdown").countdown(#{CCProcess.refresh_time}, "s");
-                        .progress_header
-                          = _ :operation_progress
-                    %tr
-                      %td
-                        .monospace
-                        #{CCProcess.status_out}
+          .progress_noscroll
+            %table(class="progress_table #{CCProcess.result_class}")
+              %tbody
+                %tr
+                  %td
+                    - if ! CCProcess.is_running
+                      %form{:action => "/actions/clear_output", :method => "post"}
+                        %input{:type => "submit", :value => (_ :clear_progress), :class => "button"}
+                    - if CCProcess.refresh_time
+                      Update log in
+                      %b#countdown
+                      :javascript
+                        $("#countdown").countdown(#{CCProcess.refresh_time}, "s");
+                %tr
+                  %td
+                    .progress_header
+                      - if CCProcess.is_running
+                        = _ :operation_progress
+                      - elsif CCProcess.exit_status == 0
+                        = _ :operation_success
+                      - else
+                        = _ :operation_failed
+
+          .progress(id="progress_scroller")
+            %table(class="progress_table #{CCProcess.result_class}")
+              %tbody
+                %tr
+                  %td
+                    #{CCProcess.status_out}
+          :javascript
+            var elem=document.getElementById('progress_scroller');
+            elem.scrollTop = elem.scrollHeight;
+
       - if Flash.active
         .flash_blocker#flash_display
           .flash#flash_view
