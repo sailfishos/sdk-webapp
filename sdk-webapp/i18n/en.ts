@@ -21,7 +21,14 @@
     <name>rpm_validator_summary</name>
     <message>
         <source>rpm_validator_summary</source>
-        <translation>Use the the validator tool to do a quick smoke test for your application package before sending it to Harbour for acceptance.</translation>
+        <translation>Use the RPM validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs the same checks as the Harbour package validation process and is automatically updated before each run if an update is available.</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_disclaimer</name>
+    <message>
+        <source>rpm_validator_disclaimer</source>
+        <translation>DISCLAIMER: A successful result from the RPM validator tool does not guarantee that your application is accepted to Harbour.</translation>
     </message>
 </context>
 <context>

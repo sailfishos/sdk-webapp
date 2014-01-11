@@ -80,8 +80,7 @@ class SdkHelper < Sinatra::Base
         Flash.to_user fname + " too large (" + File.size("/tmp/" + fname).to_s + ") bytes."
         File.unlink("/tmp/" + fname)
       else
-        validator = Harbour.new("harbour")
-        validator.validate("/tmp/" + fname, fname)
+        Harbour.validate("/tmp/" + fname, fname)
       end
     else
       Flash.to_user _(:choose_rpm)
