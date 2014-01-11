@@ -23,7 +23,7 @@ class Harbour
   end
 
   def validate(filename, basename)
-    CCProcess.start("/usr/bin/rpmvalidation.sh '#{filename}'", (_ :validating_rpm) + " #{basename}", 60*60)
+    CCProcess.start("/usr/bin/rpmvalidation-wrapper.sh -d -u -r '#{filename}'", (_ :validating_rpm) + " #{basename}", 60*60)
   end
 
   def self.load
