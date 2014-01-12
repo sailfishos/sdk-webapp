@@ -60,6 +60,13 @@
     </message>
 </context>
 <context>
+    <name>file_too_large</name>
+    <message>
+        <source>file_too_large</source>
+        <translation>File too large</translation>
+    </message>
+</context>
+<context>
     <name>validating_rpm</name>
     <message>
         <source>validating_rpm</source>

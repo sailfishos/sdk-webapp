@@ -67,19 +67,19 @@ class SdkHelper < Sinatra::Base
 # harbour_tools
   get '/:locale/harbour_tools/' do
     locale_set
-    CCProcess.get_output(2, 0, 0)
+    CCProcess.get_output(3, 0, 0)
     haml :harbour_tools, :locals => { :tab => :harbour_tools }
   end
 
   post '/:locale/harbour_tools/validate_rpm' do
-    # TODO somehow validate file size before downloading
-    # TODO replaces + chars with whitespace
-    if (! params[:rpm_name].nil?)
-      fname = params[:rpm_name][:filename]
+    if params[:rpm_name].nil?
+      Flash.to_user _(:choose_rpm)
+    else
+      # + chars in filename have been converted to spaces, let's
+      # convert them back
+      fname = params[:rpm_name][:filename].tr(' ','+')
       File.rename(params[:rpm_name][:tempfile], "/tmp/" + fname)
       Harbour.validate("/tmp/" + fname, fname)
-    else
-      Flash.to_user _(:choose_rpm)
     end
     redirect to("/"+params[:locale]+'/harbour_tools/')
   end

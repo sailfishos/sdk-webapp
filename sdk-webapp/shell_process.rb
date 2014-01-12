@@ -36,6 +36,39 @@ class ShellProcess
 		ret
 	end
 
+#	def fetch(pipe, *params)
+#          params ||= [{}]
+#          raise ArgumentError, "fetch needs named arguments" if params.size > 1 or (params.size >0 and not params[0].kind_of?(Hash)) #test
+#          params = params[0]
+#          ret = ""
+#          eof = false
+#          start = Time.now
+#          loop {
+#            begin
+#              result = IO.select([pipe])
+#              #            puts result.inspect
+#              if result
+#                inp = result[0]
+#                inp.each do |x|
+#                  if x == pipe
+#                    buf = pipe.read_nonblock(1000000)
+#                    if buf.length == 0
+#                      break
+#                    else
+#                      ret += buf
+#                    end
+#                  end
+#                end
+#              end
+#            rescue EOFError
+#              eof = true
+#            end
+#
+#            break if params[:timeout] and (params[:timeout] < (Time.new - start))
+#            break if eof and status[0] == "Z"
+#          }
+#          ret
+#        end
 
 	def stdout_read(*params)
 		fetch(@stdout, *params)
