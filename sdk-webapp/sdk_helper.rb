@@ -72,19 +72,20 @@ class SdkHelper < Sinatra::Base
   end
 
   post '/:locale/harbour_tools/validate_rpm' do
+    # TODO somehow validate file size before downloading
+    # TODO replaces + chars with whitespace
     if (! params[:rpm_name].nil?)
       fname = params[:rpm_name][:filename]
       File.rename(params[:rpm_name][:tempfile], "/tmp/" + fname)
-      # TODO this limit is arbitrary
-      if File.size("/tmp/" + fname) > 50000000
-        Flash.to_user fname + " too large (" + File.size("/tmp/" + fname).to_s + ") bytes."
-        File.unlink("/tmp/" + fname)
-      else
-        Harbour.validate("/tmp/" + fname, fname)
-      end
+      Harbour.validate("/tmp/" + fname, fname)
     else
       Flash.to_user _(:choose_rpm)
     end
+    redirect to("/"+params[:locale]+'/harbour_tools/')
+  end
+
+  post '/:locale/harbour_tools/updates' do
+    Harbour.toggle_updates
     redirect to("/"+params[:locale]+'/harbour_tools/')
   end
 

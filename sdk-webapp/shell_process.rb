@@ -15,7 +15,7 @@ class ShellProcess
 		@start_time = Time.new
 	end
 
-	def fetch(pipe,*params)
+	def fetch(pipe, *params)
 		params ||= [{}]
 		raise ArgumentError, "fetch needs named arguments" if params.size > 1 or (params.size >0 and not params[0].kind_of?(Hash)) #test
 		params = params[0]
@@ -24,7 +24,7 @@ class ShellProcess
 		start = Time.now
 		loop {
 			begin #FIXME: select
-				ret += pipe.read_nonblock(1000000) 
+				ret += pipe.read_nonblock(1000000)
 			rescue Errno::EAGAIN
 			rescue EOFError
 				eof = true

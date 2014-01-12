@@ -11,6 +11,27 @@
     </message>
 </context>
 <context>
+    <name>harbour_tool_updates</name>
+    <message>
+        <source>harbour_tools_updates</source>
+        <translation>Harbour tool updates are</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_updates_enabled</name>
+    <message>
+        <source>harbour_updates_enabled</source>
+        <translation>Enabled</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_updates_disabled</name>
+    <message>
+        <source>harbour_updates_disabled</source>
+        <translation>Disabled</translation>
+    </message>
+</context>
+<context>
     <name>harbour_summary</name>
     <message>
         <source>harbour_summary</source>
@@ -21,7 +42,7 @@
     <name>rpm_validator_summary</name>
     <message>
         <source>rpm_validator_summary</source>
-        <translation>Use the RPM validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs the same checks as the Harbour package validation process and is automatically updated before each run if an update is available.</translation>
+        <translation>Use the RPM validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs the same checks as the Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
     </message>
 </context>
 <context>
