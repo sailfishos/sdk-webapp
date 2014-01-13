@@ -71,8 +71,10 @@ class Provider
 
   # Some class methods to handle iteration and save/load
   def self.each
-    for e in providers do
-      yield e
+    if ! providers.nil?
+      for e in providers do
+        yield e
+      end
     end
   end
 
@@ -110,7 +112,9 @@ class Provider
 
   def self.targetTemplates
     t=[]
-    providers.each { |p| t += p.targetTemplates }
+    if ! providers.nil?
+      providers.each { |p| t += p.targetTemplates }
+    end
     t
   end
 
