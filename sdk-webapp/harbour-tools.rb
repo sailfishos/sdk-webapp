@@ -32,17 +32,16 @@ class Harbour
   def self.load
   end
 
-  def self.toggle_updates
-    @@updates=! @@updates
-    return ""
+  def self.updates_readable
+    _ (@@updates ? :harbour_updates_enabled : :harbour_updates_disabled)
+  end
+
+  def self.updates=(val)
+    @@updates = val
   end
 
   def self.updates
-    if @@updates == true
-      return (_ :harbour_updates_enabled)
-    else
-      return (_ :harbour_updates_disabled)
-    end
+    @@updates
   end
 
   def self.filename

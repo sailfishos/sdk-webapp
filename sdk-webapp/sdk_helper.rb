@@ -77,16 +77,16 @@ class SdkHelper < Sinatra::Base
     else
       # + chars in filename have been converted to spaces, let's
       # convert them back
-      fname = params[:rpm_name][:filename].tr(' ','+')
-      File.rename(params[:rpm_name][:tempfile], "/tmp/" + fname)
-      Harbour.validate("/tmp/" + fname, fname)
+      fname = params[:rpm_name][:filename].tr(' ', '+')
+      File.rename(params[:rpm_name][:tempfile], Dir.tmpdir + "/" + fname)
+      Harbour.validate(Dir.tmpdir + "/" + fname, fname)
     end
     redirect to("/"+params[:locale]+'/harbour_tools/')
   end
 
   post '/:locale/harbour_tools/updates' do
-    Harbour.toggle_updates
-    redirect to("/"+params[:locale]+'/harbour_tools/')
+    Harbour.updates=!(params[:updates] == "true")
+    { value: Harbour.updates_readable, state: Harbour.updates }.to_json
   end
 
 # updates  
