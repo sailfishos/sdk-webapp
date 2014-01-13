@@ -35,7 +35,7 @@
     <name>harbour_summary</name>
     <message>
         <source>harbour_summary</source>
-        <translation>This page contains tools relevant to Jolla Harbour.</translation>
+        <translation>This page contains tools relevant to &lt;a href="http://harbour.jolla.com/"&gt;Jolla Harbour&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
