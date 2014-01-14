@@ -42,7 +42,7 @@
     <name>rpm_validator_summary</name>
     <message>
         <source>rpm_validator_summary</source>
-        <translation>Use the RPM validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs the same checks as the Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
+        <translation>Use the RPM validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs similar checks to the Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
     </message>
 </context>
 <context>
