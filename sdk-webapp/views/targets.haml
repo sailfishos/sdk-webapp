@@ -46,29 +46,29 @@
           %input{:type => 'submit', :value => (_ :add), :class => 'button'}
 
   #targets_table
-    =_(:target_summary)
+    .page_header
+      = _ :manage_targets
     %table
       %tbody
-        .page_header
-          = _ :manage_targets
-          - Target.each do |target|
-            %tr
-              %td.element_name
-                #{target.name}
-              %td.element_manage
-                %a.button.manage_link(href='/#{@language}/targets/#{target.name}')
-                  = _(:manage)
-              %td.delete_button
-                %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
-                  %input{:type => "submit", :value => (_ :delete), :class => "button", :name=> "_method"}
-              -# if target.has_update
-                %td.upgrade_button
-                  %form{:action => "/targets/#{target}/upgrade", :method => "post"}
-                    %input{:type => "submit", :value => "upgrade", :class => "button"}
-              - if ! target.is_known
-                %td.upgrade_button
-                  %form{:action => "/#{@language}/targets/#{target.name}/upgrade", :method => "post"}
-                    %input{:type => "submit", :value => "sync", :class => "button"}
+        =_(:target_summary)
+        - Target.each do |target|
+          %tr
+            %td.element_name
+              #{target.name}
+            %td.element_manage
+              %a.button.manage_link(href='/#{@language}/targets/#{target.name}')
+                = _(:manage)
+            %td.delete_button
+              %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
+                %input{:type => "submit", :value => (_ :delete), :class => "button", :name=> "_method"}
+            -# if target.has_update
+              %td.upgrade_button
+                %form{:action => "/targets/#{target}/upgrade", :method => "post"}
+                  %input{:type => "submit", :value => "upgrade", :class => "button"}
+            - if ! target.is_known
+              %td.upgrade_button
+                %form{:action => "/#{@language}/targets/#{target.name}/upgrade", :method => "post"}
+                  %input{:type => "submit", :value => "sync", :class => "button"}
                   
 
   .clear

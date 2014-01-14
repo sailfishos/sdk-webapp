@@ -6,10 +6,14 @@
       %form{:action => "/#{@language}/targets/#{@target}/sync", :method => :post}
         %input{:type => 'submit', :value => (_ :sync), :class => "button", :name => "_method"}
           = _(:explain_sync)
+          %br
+          %br
     %div.sync_button
       %form{:action => "/#{@language}/targets/#{@target}/refresh", :method => :post}
         %input{:type => 'submit', :value => (_ :refresh), :class => "button", :name => "_method"}
           = _(:explain_refresh)
+          %br
+          %br
     -# %div.packages_button
       %a{:href => "/#{@language}/targets/#{@target}/packages", :class => "button button_link"}
         = _(:manage_packages)
@@ -19,6 +23,8 @@
   #packages_table
     %form{:action => "/#{@language}/targets/add", :method => 'post'}
       %input{:id => "search", :type => "text", :autocomplete => "off", :onkeyup => "pkgFilter.run(this)", :class => "button parameter_text_field"}
+      %br
+      %br
       %div{:id => "search_done"}
         = _(:search_for_packages)
       %div{:id => "search_active"}

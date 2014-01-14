@@ -2,19 +2,23 @@ require './shell_process'
 
 class CCProcess
   class Failed < Exception; end
-  REFRESH_PERIOD=5
-
   @@process=@@status_out=@@refresh_time=@@process_exitstatus=nil
-  def self.tail_update
+
+  def self.get_output(refresh_period=5, tail_update=1, errors=1)
     # progress background color
     @@process_result_class = "process_result_ok"
 
     if @@process
-      @@refresh_time = REFRESH_PERIOD
-      @@process_tail += @@process.stdout_read(timeout: 0) + @@process.stderr_read(timeout: 0)
-      split = @@process_tail.split("\n",-1).collect { |nline| nline.split("\r",-1)[-1] }
-      @@process_tail = (split[(-[10,split.size].min)..-1] or []).join("\n")
-      @@status_out = @@process_tail.split("\n").join("<br/>\n").gsub(" ","&nbsp;")
+      @@refresh_time = refresh_period
+      @@process_tail += @@process.stdout_read(timeout: 0)
+      if errors == 1
+        @@process_tail += @@process.stderr_read(timeout: 0)
+      end
+      if tail_update == 1
+        split = @@process_tail.split("\n",-1).collect { |nline| nline.split("\r",-1)[-1] }
+        @@process_tail = (split[(-[10,split.size].min)..-1] or []).join("\n")
+      end
+      @@status_out = @@process_tail.split("\n").join("<br/>\n")
       if @@process.status[0] == "Z"
         @@process_exitstatus = @@process.reap.exitstatus
         
@@ -30,9 +34,9 @@ class CCProcess
         @@process_result_class = "process_result_fail"
       end
       if @@process
-        @@status_out = "<b>" + "-"*40 + " " + @@process_description + "</b><br/>\n<br/>\n" + @@status_out
+        @@status_out = "<h1>" + @@process_description + "</h1><br/>\n" + @@status_out
       else
-        @@status_out = "<b>" + "-"*40 + " " + @@process_exit + "</b><br/>\n<br/>\n" + @@status_out
+        @@status_out = "<h1>" + @@process_exit + "</h1><br/>\n" + @@status_out
       end
     end
     @@status_out = @@status_out
@@ -56,6 +60,10 @@ class CCProcess
 
   def self.result_class
     @@process_result_class
+  end
+
+  def self.exit_status
+    @@process_exitstatus
   end
 
   def self.refresh_time

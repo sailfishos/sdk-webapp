@@ -5,7 +5,7 @@ class Flash
 
   def self.reset   
     @@msgs = nil
-    puts "Flash.reset"
+    # puts "Flash.reset"
   end
 
   def self.active

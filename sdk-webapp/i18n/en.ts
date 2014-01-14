@@ -2,6 +2,81 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_US" sourcelanguage="en">
 
+<!-- views/harbour_tools.haml -->
+<context>
+    <name>harbour_tools</name>
+    <message>
+        <source>harbour_tools</source>
+        <translation>Harbour Tools</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_tool_updates</name>
+    <message>
+        <source>harbour_tools_updates</source>
+        <translation>Harbour tool updates are</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_updates_enabled</name>
+    <message>
+        <source>harbour_updates_enabled</source>
+        <translation>Enabled</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_updates_disabled</name>
+    <message>
+        <source>harbour_updates_disabled</source>
+        <translation>Disabled</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_summary</name>
+    <message>
+        <source>harbour_summary</source>
+        <translation>This page contains tools relevant to &lt;a href="http://harbour.jolla.com/"&gt;Jolla Harbour&lt;/a&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_summary</name>
+    <message>
+        <source>rpm_validator_summary</source>
+        <translation>Use the RPM validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs similar checks to the Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_disclaimer</name>
+    <message>
+        <source>rpm_validator_disclaimer</source>
+        <translation>DISCLAIMER: A successful result from the RPM validator tool does not guarantee that your application is accepted to Harbour.</translation>
+    </message>
+</context>
+<context>
+    <name>do_validate</name>
+    <message>
+        <source>do_validate</source>
+        <translation>Validate</translation>
+    </message>
+</context>
+<context>
+    <name>file_too_large</name>
+    <message>
+        <source>file_too_large</source>
+        <translation>File too large</translation>
+    </message>
+</context>
+<context>
+    <name>validating_rpm</name>
+    <message>
+        <source>validating_rpm</source>
+        <translation>Validating</translation>
+    </message>
+</context>
+
+<!-- views/harbour_tools.haml -->
+
+
 <!-- views/register_sdk.haml -->
 <context>
     <name>register_sdk</name>
@@ -104,7 +179,7 @@
     <name>flash_heading</name>
     <message>
         <source>flash_heading</source>
-        <translation>A problem occurred during that task</translation>
+        <translation>A problem occurred during this task</translation>
     </message>
 </context>
 <context>
@@ -126,6 +201,20 @@
     <message>
         <source>operation progress</source>
         <translation>Operation Progress</translation>
+    </message>
+</context>
+<context>
+    <name>operation_success</name>
+    <message>
+        <source>operation_success</source>
+        <translation>Operation Successful</translation>
+    </message>
+</context>
+<context>
+    <name>operation_failed</name>
+    <message>
+        <source>operation_failed</source>
+        <translation>Operation Failed</translation>
     </message>
 </context>
 
@@ -252,6 +341,13 @@
     <message>
         <source>add</source>
         <translation>add</translation>
+    </message>
+</context>
+<context>
+    <name>choose_rpm</name>
+    <message>
+        <source>choose_rpm</source>
+        <translation>Please choose an RPM file.</translation>
     </message>
 </context>
 <context>
