@@ -37,7 +37,7 @@ class Provider
   def targetTemplates
     if _update_check_needed then
       begin
-        response = RestClient::Request.execute(method: :get, url: url, timeout: 1, open_timeout: 2)
+        response = RestClient::Request.execute(method: :get, url: url, timeout: 2, open_timeout: 3)
         # ignore comment lines
         response = response.split(/\r?\n/).select { |line| 
           line[0] != "#" and line[0..1] != "//"
