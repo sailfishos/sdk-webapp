@@ -34,9 +34,9 @@ class CCProcess
         @@process_result_class = "process_result_fail"
       end
       if @@process
-        @@status_out = "<h1>" + @@process_description + "</h1><br/>\n" + @@status_out
+        @@status_out = "<h1>" + @@process_description + "</h1><br/>\n" + @@status_out.force_encoding("UTF-8")
       else
-        @@status_out = "<h1>" + @@process_exit + "</h1><br/>\n" + @@status_out
+        @@status_out = "<h1>" + @@process_exit + "</h1><br/>\n" + @@status_out.force_encoding("UTF-8")
       end
     end
     @@status_out = @@status_out
