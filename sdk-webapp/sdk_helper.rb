@@ -6,7 +6,7 @@ require './engine.rb'
 require './process.rb'
 require './flash.rb'
 require './registrator.rb'
-require './harbour-tools.rb'
+require './harbour_tools.rb'
 
 I18n::Backend::Simple.send(:include, I18n::Backend::Translate)
 I18n::Backend::Simple.send(:include, I18n::Backend::TS)
