@@ -21,6 +21,10 @@ class Engine
     @@update_info=""
   end
 
+  def self.reset_check_time
+    @@last_update_check = Time.at(0)
+  end
+
   def self.update_info
     if _update_check_needed then
       _check_for_updates

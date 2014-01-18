@@ -441,6 +441,27 @@
     </message>
 </context>
 <context>
+    <name>check_for_updates</name>
+    <message>
+        <source>check_for_updates</source>
+        <translation>Check for updates now</translation>
+    </message>
+</context>
+<context>
+    <name>Updates</name>
+    <message>
+        <source>Updates</source>
+        <translation>Updates</translation>
+    </message>
+</context>
+<context>
+    <name>refreshing_repos</name>
+    <message>
+        <source>refreshing_repos</source>
+        <translation>checking ...</translation>
+    </message>
+</context>
+<context>
   <name>Version_summary</name>
   <message>
     <source>Version_summary</source>

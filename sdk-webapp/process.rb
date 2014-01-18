@@ -78,10 +78,10 @@ class CCProcess
     @@process = ShellProcess.new(command)
   end
 
-  def self.complete(command)
+  def self.complete(command, tout=20, stime=0.1)
     process = ShellProcess.new(command)
-    ret = process.stdout_read(timeout: 20).strip
-    raise Failed, command if process.reap.exitstatus != 0
+    ret = process.stdout_read({ timeout: tout, sleeptime: stime }).strip
+    # raise Failed, command if process.reap.exitstatus != 0
     ret
   end
 end

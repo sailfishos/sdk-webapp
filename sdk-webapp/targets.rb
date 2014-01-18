@@ -43,6 +43,10 @@ class Target
     self.class.exists(@name)
   end
 
+  def reset_check_time
+    @last_update_check = Time.at(0)
+  end
+
   # Is the cache out of date?
   def _update_check_needed
     (Time.now - @last_update_check) > UPDATE_VALID_PERIOD
@@ -70,6 +74,7 @@ class Target
 
   def update()
     CCProcess.start("sdk-manage --target --update '#{@name}'", (_ :syncing_target) + " #{@name}", 60*15)
+    @last_update_check = Time.at(0)
   end
 
   def version

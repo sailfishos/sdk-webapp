@@ -110,6 +110,12 @@ class SdkHelper < Sinatra::Base
     redirect to('/'+params[:locale]+'/updates/')
   end
 
+  # force a repository refresh
+  post '/:locale/updates/refresh' do
+    refresh_repositories
+    redirect to("/"+params[:locale]+'/updates/')
+  end
+
   #update sdk
   post '/:locale/updates/engine' do
     Engine.update()
@@ -217,7 +223,7 @@ class SdkHelper < Sinatra::Base
   #update target
   post '/:locale/targets/:target/update' do
     Target.get(params[:target]).update
-    redirect to('/'+params[:locale]+'/targets/')
+    redirect to('/'+params[:locale]+'/updates/')
   end
 
   #install package
@@ -256,6 +262,14 @@ class SdkHelper < Sinatra::Base
         ENV['LANG'].split("_")[0]
       else
         'C'
+      end
+    end
+
+    def refresh_repositories
+      CCProcess.complete("sdk-manage --refresh-all", 60, 1)
+      Engine.reset_check_time
+      Target.each do |t|
+        t.reset_check_time if not t.nil?
       end
     end
 
