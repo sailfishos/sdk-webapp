@@ -2,8 +2,8 @@
 Description=sdk webapp
 
 [Service]
-Environment="TMPDIR=/var/tmp/" "RACK_ENV=production"
-ExecStart=/usr/bin/rackup 
+Environment="TMPDIR=/var/tmp/"
+ExecStart=/usr/bin/puma -e production
 Type=simple
 WorkingDirectory=/usr/lib/sdk-webapp-bundle/
 User=mersdk
