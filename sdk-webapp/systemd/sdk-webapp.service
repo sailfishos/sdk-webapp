@@ -3,7 +3,7 @@ Description=sdk webapp
 
 [Service]
 Environment="TMPDIR=/var/tmp/"
-ExecStart=/usr/bin/puma -e production
+ExecStart=/usr/bin/puma -t 1:1 -e production
 Type=simple
 WorkingDirectory=/usr/lib/sdk-webapp-bundle/
 User=mersdk
