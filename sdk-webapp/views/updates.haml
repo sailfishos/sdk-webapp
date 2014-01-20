@@ -126,7 +126,6 @@
         .parameter.parameter_add_button
           %input{:type => 'submit', :value => (_ :add), :class => 'button'}
     :javascript
-      $("#provider_control").hide() // TODO make this work
       $("#provider_add").hide()
       $("#provider_control").click(function () {
         $("#provider_add").toggle()
