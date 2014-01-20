@@ -157,6 +157,12 @@ class SdkHelper < Sinatra::Base
     redirect to(request.referer)
   end
 
+  # stop a background process
+  post '/actions/cancel_process' do
+    CCProcess.cancel
+    redirect to(request.referer)
+  end
+
 # targets  
   get '/:locale/targets/' do
     locale_set

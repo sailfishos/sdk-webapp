@@ -141,6 +141,13 @@
     </message>
 </context>
 <context>
+    <name>cancel_process</name>
+    <message>
+        <source>cancel_process</source>
+        <translation>Cancel</translation>
+    </message>
+</context>
+<context>
     <name>targets</name>
     <message>
         <source>targets</source>

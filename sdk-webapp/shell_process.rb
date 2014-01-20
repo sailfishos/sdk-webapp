@@ -57,11 +57,11 @@ class ShellProcess
 	end
 
 	def kill(signal=15)
-		`sudo kill -#{signal} #{@pid}`
+          `sudo kill -#{signal} #{@pid}`
 	end
 
-	def reap
-		kill(9)
+	def reap(signal=9)
+		kill(signal)
 		close
 		wait
 	end

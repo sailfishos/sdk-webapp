@@ -24,7 +24,7 @@ class Target
 
   # Installs a target to the filesystem and sb2 using a url/toolchain pair
   def create(url, toolchain)
-    CCProcess.start("sdk-manage --target --install '#{@name}' '#{toolchain}' '#{url}'", (_ :adding_target) + " #{@name}", 60*60)
+    CCProcess.start("sdk-manage --target --install '#{@name}' '#{toolchain}' '#{url}'", (_ :adding_target) + " #{@name}", 60*60, 1)
   end
 
   # Removes a target from the fs and sb2

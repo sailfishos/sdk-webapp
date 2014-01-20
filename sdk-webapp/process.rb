@@ -2,7 +2,7 @@ require './shell_process'
 
 class CCProcess
   class Failed < Exception; end
-  @@process=@@status_out=@@refresh_time=@@process_exitstatus=nil
+  @@process=@@status_out=@@refresh_time=@@process_exitstatus=@@cancellable=nil
 
   def self.get_output(refresh_period=5, tail_update=1, errors=1)
     # progress background color
@@ -70,8 +70,22 @@ class CCProcess
     @@refresh_time
   end
 
-  def self.start(command, description, timeout)
+  def self.cancellable
+    @@cancellable
+  end
+
+  def self.cancel(signal=1)
+    if @@process and @@cancellable
+      @@process.reap(signal)
+      @@refresh_time = @@process = nil
+      @@process_result_class = "process_result_fail"
+      @@process_exit = @@process_description + " - " + (_ :process_killed)
+    end
+  end
+
+  def self.start(command, description, timeout, cancellable=0)
     return false if @@process
+    @@cancellable = cancellable
     @@process_tail = ""
     @@process_description = description
     @@process_timeout = timeout
