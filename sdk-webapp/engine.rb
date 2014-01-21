@@ -46,6 +46,4 @@ class Engine
     @@last_update_check=Time.at(0)
   end
 
-  def self.load
-  end
 end

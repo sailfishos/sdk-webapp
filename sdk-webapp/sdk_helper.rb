@@ -25,10 +25,6 @@ class SdkHelper < Sinatra::Base
   
   before do
     pass if request.path_info =~ /\.css$/
-    Engine.load
-    Target.load
-    Registrator.load
-    Harbour.load
   end
 
   get "/index.css" do
@@ -165,6 +161,7 @@ class SdkHelper < Sinatra::Base
 
 # targets  
   get '/:locale/targets/' do
+    Target.load
     locale_set
     CCProcess.get_output
     haml :targets, :locals => { :tab => :targets }
