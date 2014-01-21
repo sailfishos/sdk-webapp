@@ -272,7 +272,10 @@ class SdkHelper < Sinatra::Base
     end
 
     def refresh_repositories
-      CCProcess.complete("sdk-manage --refresh-all", 60, 1)
+      begin
+        CCProcess.complete("sdk-manage --refresh-all", 60, 1)
+      rescue CCProcess::Failed
+      end
       Engine.reset_check_time
       Target.each do |t|
         t.reset_check_time if not t.nil?
