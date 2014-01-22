@@ -414,6 +414,13 @@
     </message>
 </context>
 <context>
+    <name>target_required_parameter_missing</name>
+    <message>
+        <source>target_required_parameter_missing</source>
+        <translation>A name and a rootstrap URL are required to create a target.</translation>
+    </message>
+</context>
+<context>
     <name>target_already_present</name>
     <message>
         <source>target_already_present</source>

@@ -22,7 +22,7 @@ end
 class SdkHelper < Sinatra::Base
 
   use Rack::MethodOverride #this is needed for delete methods
-  
+
   before do
     pass if request.path_info =~ /\.css$/
   end
@@ -45,7 +45,7 @@ class SdkHelper < Sinatra::Base
     haml :index, :locals => { :tab => :sdk }
   end
 
-# register_sdk 
+# register_sdk
   get '/:locale/register_sdk/' do
     locale_set
     CCProcess.get_output
@@ -85,7 +85,7 @@ class SdkHelper < Sinatra::Base
     { value: Harbour.updates_readable, state: Harbour.updates }.to_json
   end
 
-# updates  
+# updates
   get '/:locale/updates/' do
     locale_set
     CCProcess.get_output
@@ -159,7 +159,7 @@ class SdkHelper < Sinatra::Base
     redirect to(request.referer)
   end
 
-# targets  
+# targets
   get '/:locale/targets/' do
     Target.load
     locale_set
@@ -187,24 +187,29 @@ class SdkHelper < Sinatra::Base
       name = params[:target_name]
       url = params[:target_url]
       target_toolchain = params[:target_toolchain]
+      if name == '' or url == ''
+        Flash.to_user _(:target_required_parameter_missing)
+        redirect to('/'+params[:locale]+'/targets/')
+        return
+      end
     end
-    
+
     if ! Toolchain.exists(target_toolchain) then
-      Flash.to_user _(:toolchain_not_available, toolchain: target_toolchain)      
+      Flash.to_user _(:toolchain_not_available, toolchain: target_toolchain)
     else
       tc = Toolchain.get(target_toolchain)
       if ! tc.installed
-        Flash.to_user _(:toolchain_not_installed, toolchain: target_toolchain)      
+        Flash.to_user _(:toolchain_not_installed, toolchain: target_toolchain)
       elsif ! Target.exists(name) then
         target = Target.get(name)
         target.create(url, target_toolchain)
       else
-        Flash.to_user _(:target_already_present, name: name)      
+        Flash.to_user _(:target_already_present, name: name)
       end
     end
     redirect to('/'+params[:locale]+'/targets/')
   end
-  
+
   #remove target
   delete '/:locale/targets/:target' do
     Target.get(params[:target]).remove
@@ -247,19 +252,19 @@ class SdkHelper < Sinatra::Base
 
 
   # info
-  get '/:locale/info' do  
+  get '/:locale/info' do
     content_type 'text/plain'
     ["df", "rpmquery -qa", "cat /proc/version", "/sbin/ifconfig -a", "/sbin/route -n", "mount", "zypper lr", "ping -c 4 google.com", "free"].map { |command|
       ["*"*80,command,"\n", CCProcess.complete(command), "\n"] rescue Exception
     }.flatten.map { |line| line.to_s }.join("\n")
-  end		
+  end
 
   helpers do
 
     def locale_set
       @language = I18n.locale = params[:locale]
     end
-    
+
     def system_language
       if ENV['LANG']
         ENV['LANG'].split("_")[0]
