@@ -24,7 +24,7 @@ class Target
 
   # Installs a target to the filesystem and sb2 using a url/toolchain pair
   def create(url, toolchain)
-    CCProcess.start("sdk-manage --target --install '#{@name}' '#{toolchain}' '#{url}'", (_ :adding_target) + " #{@name}", 60*60)
+    CCProcess.start("sdk-manage --target --install '#{@name}' '#{toolchain}' '#{url}'", (_ :adding_target) + " #{@name}", 60*60, 1)
   end
 
   # Removes a target from the fs and sb2
@@ -41,6 +41,10 @@ class Target
   # Is there an sb2 target setup already?
   def exists
     self.class.exists(@name)
+  end
+
+  def reset_check_time
+    @last_update_check = Time.at(0)
   end
 
   # Is the cache out of date?
@@ -70,6 +74,7 @@ class Target
 
   def update()
     CCProcess.start("sdk-manage --target --update '#{@name}'", (_ :syncing_target) + " #{@name}", 60*15)
+    @last_update_check = Time.at(0)
   end
 
   def version

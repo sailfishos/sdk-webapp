@@ -5,7 +5,6 @@ class Flash
 
   def self.reset   
     @@msgs = nil
-    # puts "Flash.reset"
   end
 
   def self.active
@@ -23,7 +22,6 @@ class Flash
   end
 
   def self.to_user(msg, importance = :error)
-    puts "TELL_USER: #{msg}"
     @@msgs = @@msgs || []
     @@msgs.push [msg, importance]
   end

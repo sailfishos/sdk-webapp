@@ -29,6 +29,7 @@ class Toolchain
     if (Time.now - @@last_update_check) > UPDATE_VALID_PERIOD then
       @@toolchains = {}
       CCProcess.complete("sdk-manage --toolchain --list").split.map {|line| line.split(',')  }.map { |tc, i| @@toolchains[tc] = Toolchain.new(tc, (i == 'i')) }
+      @@last_update_check = Time.now
     end
     @@toolchains
   rescue CCProcess::Failed

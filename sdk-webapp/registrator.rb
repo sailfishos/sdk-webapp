@@ -37,7 +37,4 @@ class Registrator
     CCProcess.start("sdk-manage --register-all --user '#{@ssu_username}' --password '#{@ssu_password}'", (_ :registering) + " #{@ssu_username}", 60*60 )
   end
 
-  def self.load
-  end
-
 end

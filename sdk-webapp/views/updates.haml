@@ -7,6 +7,24 @@
 
     = _ "Version_summary"
 
+
+  #update_wrap.update_section
+    %h1= _ "Updates"
+
+    %form#check_updates_form{:action => "/#{@language}/updates/refresh", :method => "post"}
+      %input#check_updates_btn{:type => "submit", :value => (_ :check_for_updates), :class => "button" }
+      :javascript
+        $("#check_updates_form").submit(function() {
+            $("#check_updates_btn").attr("value", "#{_ :refreshing_repos}");
+            $("#check_updates_btn").attr("disabled", "true");
+            $.ajax({
+                url:      "refresh",
+                type:     "POST",
+              });
+            return true;
+          })
+    .clear
+
   #engine_wrap.update_section
     %h1= _ "Engine"
 
@@ -25,7 +43,6 @@
     - else
       = _ "Uptodate"
     .clear
-
 
   #target_wrap.update_section
     %h1= _ "Targets"
@@ -78,7 +95,7 @@
             %td
               #{provider.name}
             %td
-              (#{provider.url})
+              #{provider.url}
             %td
               - if provider.success
                 OK
@@ -109,7 +126,6 @@
         .parameter.parameter_add_button
           %input{:type => 'submit', :value => (_ :add), :class => 'button'}
     :javascript
-      $("#provider_control").hide() // TODO make this work
       $("#provider_add").hide()
       $("#provider_control").click(function () {
         $("#provider_add").toggle()

@@ -26,10 +26,7 @@ class Harbour
       do_updates="-u"
     end
 
-    CCProcess.start("/usr/bin/rpmvalidation-wrapper.sh -d #{do_updates} -r #{filename}", (_ :validating_rpm) + " #{basename}", 60*60)
-  end
-
-  def self.load
+    CCProcess.start("/usr/bin/rpmvalidation-wrapper.sh -d #{do_updates} -r #{filename}", (_ :validating_rpm) + " #{basename}", 60*60, 1)
   end
 
   def self.updates_readable

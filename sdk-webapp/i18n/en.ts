@@ -141,6 +141,13 @@
     </message>
 </context>
 <context>
+    <name>cancel_process</name>
+    <message>
+        <source>cancel_process</source>
+        <translation>Cancel</translation>
+    </message>
+</context>
+<context>
     <name>targets</name>
     <message>
         <source>targets</source>
@@ -407,6 +414,13 @@
     </message>
 </context>
 <context>
+    <name>target_required_parameter_missing</name>
+    <message>
+        <source>target_required_parameter_missing</source>
+        <translation>A name and a rootstrap URL are required to create a target.</translation>
+    </message>
+</context>
+<context>
     <name>target_already_present</name>
     <message>
         <source>target_already_present</source>
@@ -438,6 +452,27 @@
     <message>
         <source>Version and update status</source>
         <translation>Version and update status</translation>
+    </message>
+</context>
+<context>
+    <name>check_for_updates</name>
+    <message>
+        <source>check_for_updates</source>
+        <translation>Check for updates now</translation>
+    </message>
+</context>
+<context>
+    <name>Updates</name>
+    <message>
+        <source>Updates</source>
+        <translation>Updates</translation>
+    </message>
+</context>
+<context>
+    <name>refreshing_repos</name>
+    <message>
+        <source>refreshing_repos</source>
+        <translation>checking ...</translation>
     </message>
 </context>
 <context>

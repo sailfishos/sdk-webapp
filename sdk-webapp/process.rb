@@ -2,7 +2,7 @@ require './shell_process'
 
 class CCProcess
   class Failed < Exception; end
-  @@process=@@status_out=@@refresh_time=@@process_exitstatus=nil
+  @@process=@@status_out=@@refresh_time=@@process_exitstatus=@@cancellable=nil
 
   def self.get_output(refresh_period=5, tail_update=1, errors=1)
     # progress background color
@@ -34,9 +34,9 @@ class CCProcess
         @@process_result_class = "process_result_fail"
       end
       if @@process
-        @@status_out = "<h1>" + @@process_description + "</h1><br/>\n" + @@status_out
+        @@status_out = "<h1>" + @@process_description + "</h1><br/>\n" + @@status_out.force_encoding("UTF-8")
       else
-        @@status_out = "<h1>" + @@process_exit + "</h1><br/>\n" + @@status_out
+        @@status_out = "<h1>" + @@process_exit + "</h1><br/>\n" + @@status_out.force_encoding("UTF-8")
       end
     end
     @@status_out = @@status_out
@@ -70,17 +70,31 @@ class CCProcess
     @@refresh_time
   end
 
-  def self.start(command, description, timeout)
+  def self.cancellable
+    @@cancellable
+  end
+
+  def self.cancel(signal=1)
+    if @@process and @@cancellable
+      @@process.reap(signal)
+      @@refresh_time = @@process = nil
+      @@process_result_class = "process_result_fail"
+      @@process_exit = @@process_description + " - " + (_ :process_killed)
+    end
+  end
+
+  def self.start(command, description, timeout, cancellable=0)
     return false if @@process
+    @@cancellable = cancellable
     @@process_tail = ""
     @@process_description = description
     @@process_timeout = timeout
     @@process = ShellProcess.new(command)
   end
 
-  def self.complete(command)
+  def self.complete(command, tout=20, stime=0.1)
     process = ShellProcess.new(command)
-    ret = process.stdout_read(timeout: 20).strip
+    ret = process.stdout_read({ timeout: tout, sleeptime: stime }).strip
     raise Failed, command if process.reap.exitstatus != 0
     ret
   end
