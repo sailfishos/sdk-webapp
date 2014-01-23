@@ -19,6 +19,9 @@ def _(*args)
   I18n.t(*args)
 end
 
+# initialize the Target class with data
+Target.load
+
 class SdkHelper < Sinatra::Base
 
   use Rack::MethodOverride #this is needed for delete methods
@@ -178,6 +181,11 @@ class SdkHelper < Sinatra::Base
   #add target
   post '/:locale/targets/add' do
     if params.has_key?("template_id") then
+      if params[:template_id].to_i < 0
+        Flash.to_user _(:please_select_a_preconfigured_target)
+        redirect to('/'+params[:locale]+'/targets/')
+        return
+      end
       t = Provider.targetTemplates[params[:template_id].to_i]
       url = t['url']
       name = params[:local_template_name]

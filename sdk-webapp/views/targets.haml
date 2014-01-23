@@ -11,7 +11,7 @@
               = _ :from_list
             .styled_select
               %select.button.select{:name => "template_id"}
-                %option{:value => ""}
+                %option{:value => -1}=(_ :select_target)
                 - Provider.targetTemplates.each_with_index do |targetT, i|
                   %option{:value => i}="#{targetT['provider']} / #{targetT['name']}"
           .clear

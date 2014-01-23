@@ -337,6 +337,20 @@
     </message>
 </context>
 <context>
+    <name>please_select_a_preconfigured_target</name>
+    <message>
+        <source>please_select_a_preconfigured_target</source>
+        <translation>Please select one of the targets in the list.</translation>
+    </message>
+</context>
+<context>
+    <name>select_target</name>
+    <message>
+        <source>select_target</source>
+        <translation>Select a target</translation>
+    </message>
+</context>
+<context>
     <name>local_template_name</name>
     <message>
         <source>local_template_name</source>
