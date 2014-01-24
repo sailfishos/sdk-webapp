@@ -62,9 +62,9 @@
                     - if ! CCProcess.is_running
                       %form{:action => "/actions/clear_output", :method => "post"}
                         %input{:type => "submit", :value => (_ :clear_progress), :class => "button"}
-                    - if CCProcess.is_running and CCProcess.cancellable
+                    - if CCProcess.is_running and CCProcess.cancellable == 1
                       %form{:action => "/actions/cancel_process", :method => "post"}
-                        %input{:type => "submit", :value => (_ :cancel_process), :class => "button"}
+                        %input{:type => "submit", :value => (_ :cancel_process), :class => "button", :style => "float:left" }
                     - if CCProcess.refresh_time
                       Update log in
                       %b#countdown

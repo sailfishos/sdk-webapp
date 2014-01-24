@@ -83,9 +83,14 @@ class SdkHelper < Sinatra::Base
     redirect to("/"+params[:locale]+'/harbour_tools/')
   end
 
-  post '/:locale/harbour_tools/updates' do
-    Harbour.updates=!(params[:updates] == "true")
-    { value: Harbour.updates_readable, state: Harbour.updates }.to_json
+  post '/:locale/harbour_tools/config' do
+    if params[:updates]
+      Harbour.updates=!(params[:updates] == "true")
+      { value: Harbour.updates_readable, state: Harbour.updates }.to_json
+    elsif params[:beta]
+      Harbour.beta=!(params[:beta] == "true")
+      { value: Harbour.beta_readable, state: Harbour.beta }.to_json
+    end
   end
 
 # updates

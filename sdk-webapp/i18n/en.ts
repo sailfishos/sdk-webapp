@@ -32,6 +32,20 @@
     </message>
 </context>
 <context>
+    <name>harbour_beta_enabled</name>
+    <message>
+        <source>harbour_beta_enabled</source>
+        <translation>Beta rules</translation>
+    </message>
+</context>
+<context>
+    <name>harbour_beta_disabled</name>
+    <message>
+        <source>harbour_beta_disabled</source>
+        <translation>Release rules</translation>
+    </message>
+</context>
+<context>
     <name>harbour_summary</name>
     <message>
         <source>harbour_summary</source>
@@ -347,7 +361,7 @@
     <name>select_target</name>
     <message>
         <source>select_target</source>
-        <translation>Select a target</translation>
+        <translation>select a target</translation>
     </message>
 </context>
 <context>

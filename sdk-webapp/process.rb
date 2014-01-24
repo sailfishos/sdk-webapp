@@ -14,6 +14,8 @@ class CCProcess
       if errors == 1
         @@process_tail += @@process.stderr_read(timeout: 0)
       end
+      # sanitize the process output a bit
+      @@process_tail = @@process_tail.gsub(/[<>]/, '<' => '&lt;', '>' => '&gt;')
       if tail_update == 1
         split = @@process_tail.split("\n",-1).collect { |nline| nline.split("\r",-1)[-1] }
         @@process_tail = (split[(-[10,split.size].min)..-1] or []).join("\n")
