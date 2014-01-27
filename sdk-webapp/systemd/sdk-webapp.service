@@ -2,7 +2,7 @@
 Description=sdk webapp
 
 [Service]
-Environment="TMPDIR=/var/tmp/"
+Environment="TMPDIR=/var/tmp/" "RACK_ENV=production"
 ExecStart=/usr/bin/rackup 
 Type=simple
 WorkingDirectory=/usr/lib/sdk-webapp-bundle/

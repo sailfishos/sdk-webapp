@@ -12,21 +12,26 @@ def harbour_visibility
 end
 
 class Harbour
-  @@rpm_file=nil
   @@updates=true
+  @@beta=false
 
   def id
     return @id
   end
 
   def self.validate(filename, basename)
-    @@rpm_file=filename
     do_updates=""
+    do_beta=""
+
     if @@updates
       do_updates="-u"
     end
 
-    CCProcess.start("/usr/bin/rpmvalidation-wrapper.sh -d #{do_updates} -r #{filename}", (_ :validating_rpm) + " #{basename}", 60*60, 1)
+    if @@beta
+      do_beta="--beta"
+    end
+
+    CCProcess.start("rpmvalidation-wrapper.sh -d #{do_updates} #{do_beta} -r #{filename}", (_ :validating_rpm) + " #{basename}", 60*60, 1)
   end
 
   def self.updates_readable
@@ -41,13 +46,16 @@ class Harbour
     @@updates
   end
 
-  def self.filename
-    @@rpm_file
+  def self.beta_readable
+    _ (@@beta ? :harbour_beta_enabled : :harbour_beta_disabled)
+  end
+
+  def self.beta=(val)
+    @@beta = val
+  end
+
+  def self.beta
+    @@beta
   end
 
 end
-
-def harbour_toggle_updates
-  Harbour.toggle_updates
-end
-

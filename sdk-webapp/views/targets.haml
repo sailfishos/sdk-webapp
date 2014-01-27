@@ -1,51 +1,5 @@
 .content
-  #add_target_wrap
-    .page_header.targets_header
-      = _ :add_new_target
-    #template_target_wrap
-    - if Provider.targetTemplates.size > 0
-      %form{:action => "/#{@language}/targets/add", :method => 'post'}
-        #preconfig_target_wrap
-          .parameter.parameter_name#add_from_list
-            %label
-              = _ :from_list
-            .styled_select
-              %select.button.select{:name => "template_id"}
-                %option{:value => -1}=(_ :select_target)
-                - Provider.targetTemplates.each_with_index do |targetT, i|
-                  %option{:value => i}="#{targetT['provider']} / #{targetT['name']}"
-          .clear
-          .parameter.parameter_name
-            %label
-              = _ :local_template_name
-            %input#local_template_name{:type => 'text', :name => 'local_template_name', :value => '', :class=> "button parameter_text_field"}
-          .clear
-          %input{:type => 'submit', :value => (_ :add), :class => 'button'}
-
-    #manual_target_wrap
-      %form{:action => "/#{@language}/targets/add", :method => 'post'}
-        .parameter.parameter_name
-          %label
-            = _ :toolchain
-          .styled_select
-            %select.button.select{:name => "target_toolchain"}
-              - Toolchain.each do |toolchain|
-                - if toolchain.installed
-                  %option{:value => @target_toolchain}=toolchain.name
-        .clear
-        .parameter.parameter_name
-          %label
-            = _ :target_name
-          %input#text_field1{:type => 'text', :name => 'target_name', :value => @target_name, :class=> "button parameter_text_field"}
-        .clear
-        .parameter.parameter_name
-          %label
-            = _ :target_url
-          %input#text_field2{:type => 'text', :name => 'target_url', :value => @target_url, :class=> "button parameter_text_field"}
-        .clear
-          %input{:type => 'submit', :value => (_ :add), :class => 'button'}
-
-  #targets_table
+  #targets_table.update_section
     .page_header
       = _ :manage_targets
     %table
@@ -69,6 +23,52 @@
               %td.upgrade_button
                 %form{:action => "/#{@language}/targets/#{target.name}/upgrade", :method => "post"}
                   %input{:type => "submit", :value => "sync", :class => "button"}
+
+  #add_target_wrap
+    .page_header
+      = _ :add_new_target
+    - if Provider.targetTemplates.size > 0
+      #preconfig_target_wrap
+        %form{:action => "/#{@language}/targets/add", :method => 'post'}
+          .parameter.parameter_name
+            %label
+              = _ :from_list
+            .styled_select
+              %select.button.select{:name => "template_id"}
+                %option{:value => -1}=(_ :select_target)
+                - Provider.targetTemplates.each_with_index do |targetT, i|
+                  %option{:value => i}="#{targetT['provider']} / #{targetT['name']}"
+          .clear
+          .parameter.parameter_name
+            %label
+              = _ :local_template_name
+            %input#local_template_name{:type => 'text', :name => 'local_template_name', :value => '', :class=> "button parameter_text_field"}
+          .clear
+          %input{:type => 'submit', :value => (_ :add), :class => 'button'}
+
+    #manual_target_wrap
+      %form{:action => "/#{@language}/targets/add", :method => 'post'}
+        .parameter.parameter_name
+          %label
+            = _ :toolchain
+          .styled_select
+            %select.button.select{:name => "target_toolchain"}
+              %option{:value => -1}=(_ :select_toolchain)
+              - Toolchain.each do |toolchain|
+                - if toolchain.installed
+                  %option{:value => @target_toolchain}=toolchain.name
+        .clear
+        .parameter.parameter_name
+          %label
+            = _ :target_name
+          %input#text_field1{:type => 'text', :name => 'target_name', :value => @target_name, :class=> "button parameter_text_field"}
+        .clear
+        .parameter.parameter_name
+          %label
+            = _ :target_url
+          %input#text_field2{:type => 'text', :name => 'target_url', :value => @target_url, :class=> "button parameter_text_field"}
+        .clear
+          %input{:type => 'submit', :value => (_ :add), :class => 'button'}
                   
 
   .clear

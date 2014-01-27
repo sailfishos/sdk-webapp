@@ -60,7 +60,7 @@ class SdkHelper < Sinatra::Base
     pass = params[:password]
     registrator = Registrator.new(name, pass)
     registrator.register
-    redirect to("/"+params[:locale]+'/register_sdk/')
+    redirect back
   end
 
 # harbour_tools
@@ -80,12 +80,17 @@ class SdkHelper < Sinatra::Base
       File.rename(params[:rpm_name][:tempfile], Dir.tmpdir + "/" + fname)
       Harbour.validate(Dir.tmpdir + "/" + fname, fname)
     end
-    redirect to("/"+params[:locale]+'/harbour_tools/')
+    redirect back
   end
 
-  post '/:locale/harbour_tools/updates' do
-    Harbour.updates=!(params[:updates] == "true")
-    { value: Harbour.updates_readable, state: Harbour.updates }.to_json
+  post '/:locale/harbour_tools/config' do
+    if params[:updates]
+      Harbour.updates=!(params[:updates] == "true")
+      { value: Harbour.updates_readable, state: Harbour.updates }.to_json
+    elsif params[:beta]
+      Harbour.beta=!(params[:beta] == "true")
+      { value: Harbour.beta_readable, state: Harbour.beta }.to_json
+    end
   end
 
 # updates
@@ -106,19 +111,19 @@ class SdkHelper < Sinatra::Base
     locale_set
     Provider.delete(params[:provider_id])
     Provider.save
-    redirect to('/'+params[:locale]+'/updates/')
+    redirect back
   end
 
   # force a repository refresh
   post '/:locale/updates/refresh' do
     refresh_repositories
-    redirect to("/"+params[:locale]+'/updates/')
+    redirect back
   end
 
   #update sdk
   post '/:locale/updates/engine' do
     Engine.update()
-    redirect to('/'+params[:locale]+'/updates/')
+    redirect back
   end
 
   get '/:locale/toolchains/' do
@@ -139,7 +144,7 @@ class SdkHelper < Sinatra::Base
     else
       Flash.to_user _("No toolchain called %{toolchain} is available", toolchain: toolchain)
     end
-    redirect to("/"+params[:locale]+'/toolchains/')
+    redirect back
   end
 
   #remove toolchain - not supported at the moment by sdk
@@ -153,13 +158,13 @@ class SdkHelper < Sinatra::Base
   post '/actions/clear_output' do
     CCProcess.clear
     CCProcess.get_output
-    redirect to(request.referer)
+    redirect back
   end
 
   # stop a background process
   post '/actions/cancel_process' do
     CCProcess.cancel
-    redirect to(request.referer)
+    redirect back
   end
 
 # targets
@@ -183,7 +188,7 @@ class SdkHelper < Sinatra::Base
     if params.has_key?("template_id") then
       if params[:template_id].to_i < 0
         Flash.to_user _(:please_select_a_preconfigured_target)
-        redirect to('/'+params[:locale]+'/targets/')
+        redirect back
         return
       end
       t = Provider.targetTemplates[params[:template_id].to_i]
@@ -195,9 +200,9 @@ class SdkHelper < Sinatra::Base
       name = params[:target_name]
       url = params[:target_url]
       target_toolchain = params[:target_toolchain]
-      if name == '' or url == ''
+      if name == '' or url == '' or target_toolchain.to_i < 0
         Flash.to_user _(:target_required_parameter_missing)
-        redirect to('/'+params[:locale]+'/targets/')
+        redirect back
         return
       end
     end
@@ -215,31 +220,31 @@ class SdkHelper < Sinatra::Base
         Flash.to_user _(:target_already_present, name: name)
       end
     end
-    redirect to('/'+params[:locale]+'/targets/')
+    redirect back
   end
 
   #remove target
   delete '/:locale/targets/:target' do
     Target.get(params[:target]).remove
-    redirect to('/'+params[:locale]+'/targets/')
+    redirect back
   end
 
   #refresh target
   post '/:locale/targets/:target/refresh' do
     Target.get(params[:target]).refresh
-    redirect to("/"+params[:locale]+'/targets/')
+    redirect back
   end
 
   #sync target
   post '/:locale/targets/:target/sync' do
     Target.get(params[:target]).sync
-    redirect to('/' + params[:locale] + '/targets/')
+    redirect back
   end
 
   #update target
   post '/:locale/targets/:target/update' do
     Target.get(params[:target]).update
-    redirect to('/'+params[:locale]+'/updates/')
+    redirect back
   end
 
   #install package
