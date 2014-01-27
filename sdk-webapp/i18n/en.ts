@@ -365,6 +365,13 @@
     </message>
 </context>
 <context>
+    <name>select_toolchain</name>
+    <message>
+        <source>select_toolchain</source>
+        <translation>select a toolchain</translation>
+    </message>
+</context>
+<context>
     <name>local_template_name</name>
     <message>
         <source>local_template_name</source>
@@ -445,7 +452,7 @@
     <name>target_required_parameter_missing</name>
     <message>
         <source>target_required_parameter_missing</source>
-        <translation>A name and a rootstrap URL are required to create a target.</translation>
+        <translation>A toolchain, a name and a rootstrap URL are required to create a target.</translation>
     </message>
 </context>
 <context>
