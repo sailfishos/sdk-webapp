@@ -36,8 +36,7 @@
               .li
                 = _ :sdk
           %a(href="/#{@language}/harbour_tools/" )
-            #harbour_view
-            %li.tab{ :style=> "display:#{show_harbour}" , :class => tab == :harbour_view ? "current_tab" :"" }
+            %li.tab{ :class => tab == :harbour_tools ? "current_tab" :"", :style => "display:#{show_harbour}" }
               .li
                 = _ :harbour_tools
           %a(href="/#{@language}/register_sdk/" )

@@ -267,7 +267,7 @@ class SdkHelper < Sinatra::Base
   # info
   get '/:locale/info' do
     content_type 'text/plain'
-    ["df", "rpmquery -qa", "cat /proc/version", "/sbin/ifconfig -a", "/sbin/route -n", "mount", "zypper lr", "ping -c 4 google.com", "free"].map { |command|
+    ["df -h", "rpmquery -qa|sort", "cat /proc/version", "/sbin/ifconfig -a", "/sbin/route -n", "mount", "zypper lr", "ping -c 4 releases.sailfishos.org", "free"].map { |command|
       ["*"*80,command,"\n", CCProcess.complete(command), "\n"] rescue Exception
     }.flatten.map { |line| line.to_s }.join("\n")
   end
