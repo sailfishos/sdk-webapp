@@ -84,6 +84,7 @@ class SdkHelper < Sinatra::Base
   end
 
   post '/:locale/harbour_tools/config' do
+    locale_set
     if params[:updates]
       Harbour.updates=!(params[:updates] == "true")
       { value: Harbour.updates_readable, state: Harbour.updates }.to_json

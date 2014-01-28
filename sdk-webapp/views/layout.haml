@@ -65,7 +65,7 @@
                       %form{:action => "/actions/cancel_process", :method => "post"}
                         %input{:type => "submit", :value => (_ :cancel_process), :class => "button", :style => "float:left" }
                     - if CCProcess.refresh_time
-                      Update log in
+                      = _ :update_log_in
                       %b#countdown
                       :javascript
                         $("#countdown").countdown(#{CCProcess.refresh_time}, "s");
