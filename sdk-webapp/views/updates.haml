@@ -51,8 +51,8 @@
       - Target.each do |target|
         %tr
           %td
-            #{target.name}
-            %td
+            &bull; #{target.name}
+            %td{:style => "white-space: nowrap;"}
               - if target.update_available?
                 %form{:action => "/#{@language}/targets/#{target.name}/update", :method => "post"}
                   %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "t#{target.id}_update"}
@@ -97,12 +97,13 @@
               #{provider.url}
             %td
               - if provider.success
-                OK
+                = _ :provider_ok
               - else
-                Not OK
+                = _ :provider_notok
             %td
               %form{:action => "/#{@language}/provider/#{provider.id}", :method => "post"}
-                %input{:type => "submit", :value => (_ :delete), :class => "button", :name=> "_method"}
+                %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                %input{:type => "hidden", :value => "delete", :name => "_method"}
 
     %span#provider_control.button_link
       = _ "New Provider"

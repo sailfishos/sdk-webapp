@@ -121,6 +121,7 @@ cp systemd/%{name}.service %{buildroot}%{_unitdir}/
 %defattr(-,root,root,-)
 %defattr(-,mersdk,mersdk)
 %{_libdir}/%{name}-bundle/i18n/en.ts
+%{_libdir}/%{name}-bundle/i18n/fi.ts
 %{_libdir}/%{name}-bundle/i18n/zh_CN.ts
 # >> files ts-manual
 # << files ts-manual

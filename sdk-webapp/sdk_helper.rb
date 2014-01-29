@@ -26,10 +26,6 @@ class SdkHelper < Sinatra::Base
 
   use Rack::MethodOverride #this is needed for delete methods
 
-  before do
-    pass if request.path_info =~ /\.css$/
-  end
-
   get "/index.css" do
     sass :index
   end
@@ -41,15 +37,15 @@ class SdkHelper < Sinatra::Base
   get '/register_sdk/' do redirect to "/"+system_language+"/register_sdk/"; end
   get '/harbour_tools/' do redirect to "/"+system_language+"/harbour_tools/"; end
 
-
-  get '/:locale/' do
+  # the /? matches the url with or without the trailing /
+  get '/:locale/?' do
     locale_set
     CCProcess.get_output
-    haml :index, :locals => { :tab => :sdk }
+    haml :targets, :locals => { :tab => :targets }
   end
 
 # register_sdk
-  get '/:locale/register_sdk/' do
+  get '/:locale/register_sdk/?' do
     locale_set
     CCProcess.get_output
     haml :register_sdk, :locals => { :tab => :register_sdk }
@@ -64,7 +60,7 @@ class SdkHelper < Sinatra::Base
   end
 
 # harbour_tools
-  get '/:locale/harbour_tools/' do
+  get '/:locale/harbour_tools/?' do
     locale_set
     CCProcess.get_output(3, 0, 0)
     haml :harbour_tools, :locals => { :tab => :harbour_tools }
@@ -84,6 +80,7 @@ class SdkHelper < Sinatra::Base
   end
 
   post '/:locale/harbour_tools/config' do
+    locale_set
     if params[:updates]
       Harbour.updates=!(params[:updates] == "true")
       { value: Harbour.updates_readable, state: Harbour.updates }.to_json
@@ -94,7 +91,7 @@ class SdkHelper < Sinatra::Base
   end
 
 # updates
-  get '/:locale/updates/' do
+  get '/:locale/updates/?' do
     locale_set
     CCProcess.get_output
     haml :updates, :locals => { :tab => :updates }
@@ -126,7 +123,7 @@ class SdkHelper < Sinatra::Base
     redirect back
   end
 
-  get '/:locale/toolchains/' do
+  get '/:locale/toolchains/?' do
     locale_set
     CCProcess.get_output
     haml :toolchains, :locals => { :tab => :toolchains }
@@ -168,8 +165,11 @@ class SdkHelper < Sinatra::Base
   end
 
 # targets
-  get '/:locale/targets/' do
-    Target.load
+  get '/:locale/targets/?' do
+    if ! CCProcess.is_running
+      # if a process is running, this is not useful
+      Target.load
+    end
     locale_set
     CCProcess.get_output
     haml :targets, :locals => { :tab => :targets }
@@ -265,7 +265,7 @@ class SdkHelper < Sinatra::Base
 
 
   # info
-  get '/:locale/info' do
+  get '/:locale/info/?' do
     content_type 'text/plain'
     ["df -h", "rpmquery -qa|sort", "cat /proc/version", "/sbin/ifconfig -a", "/sbin/route -n", "mount", "zypper lr", "ping -c 4 releases.sailfishos.org", "free"].map { |command|
       ["*"*80,command,"\n", CCProcess.complete(command), "\n"] rescue Exception
@@ -295,6 +295,9 @@ class SdkHelper < Sinatra::Base
       Target.each do |t|
         t.reset_check_time if not t.nil?
       end
+      # also reset the providers check time to force rechecking of URL
+      # validity
+      Provider.reset_check_time
     end
 
     # -------------------------------- Packages
@@ -307,11 +310,11 @@ class SdkHelper < Sinatra::Base
     end
 
     def package_install(target, package)
-      CCProcess.start("sdk-manage --devel --install '#{target}' '#{package}'", "installing package #{package}", 60*60)
+      CCProcess.start("sdk-manage --devel --install '#{target}' '#{package}'", (_ :installing_package) + " #{package}", 60*60)
     end
 
     def package_remove(target, package)
-      CCProcess.start("sdk-manage --devel --remove '#{target}' '#{package}'", "removing package #{package}", 60*15)
+      CCProcess.start("sdk-manage --devel --remove '#{target}' '#{package}'", (_ :removing_package) +" #{package}", 60*15)
     end
   end
 

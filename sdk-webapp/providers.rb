@@ -19,7 +19,7 @@ class Provider
     @url = url
     @success=false
     @targetTemplates=[]
-    @last_update_check = Time.at(0)
+    @@last_update_check = Time.at(0)
 
     # Now add ourselves to the class list
     @@providers ||= [] # First instance needs an array
@@ -31,7 +31,7 @@ class Provider
 
   # Is the cache out of date?
   def _update_check_needed
-    (Time.now - @last_update_check) > UPDATE_VALID_PERIOD
+    (Time.now - @@last_update_check) > UPDATE_VALID_PERIOD
   end
 
   def targetTemplates
@@ -50,7 +50,7 @@ class Provider
         @targetTemplates=[]
       end
     end
-    @last_update_check = Time.now
+    @@last_update_check = Time.now
     @targetTemplates
   end
 
@@ -116,6 +116,11 @@ class Provider
       providers.each { |p| t += p.targetTemplates }
     end
     t
+  end
+
+  def self.reset_check_time
+    @@last_update_check = Time.at(0)
+    targetTemplates
   end
 
 end

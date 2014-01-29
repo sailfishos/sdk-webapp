@@ -49,6 +49,7 @@ SubPackages:
     Files:
       - '%defattr(-,mersdk,mersdk)'
       - '%{_libdir}/%{name}-bundle/i18n/en.ts'
+      - '%{_libdir}/%{name}-bundle/i18n/fi.ts'
       - '%{_libdir}/%{name}-bundle/i18n/zh_CN.ts'
   - Name: ts-devel
     Summary: Translation source

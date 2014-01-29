@@ -12,7 +12,7 @@
     %script{src: "/count.js"}
     %script{src: "/hover.js"}
   %body
-    / Declare Variables
+    -# Declare Variables
     - show_register = registration_visibility() 
     - show_harbour = harbour_visibility()
 
@@ -23,10 +23,11 @@
             %li.tab{:class => tab == :targets ? "current_tab" :"" }
               .li
                 = _ :targets
-          %a(href="/#{@language}/toolchains/")
-            %li.tab{:class => tab == :toolchains ? "current_tab" :"" }
-              .li
-                = _ :toolchains
+          - if ! show_harbour
+            %a(href="/#{@language}/toolchains/")
+              %li.tab{:class => tab == :toolchains ? "current_tab" :"" }
+                .li
+                  = _ :toolchains
           %a(href="/#{@language}/updates/")
             %li.tab{:class => tab == :updates ? "current_tab" :"" }
               .li
@@ -54,7 +55,7 @@
       - if CCProcess.exists
         .progress_blocker
           .progress_noscroll
-            %table(class="progress_table #{CCProcess.result_class}")
+            %table(class="progress_table #{CCProcess.result_class} rounded_table_top")
               %tbody
                 %tr
                   %td
@@ -65,7 +66,7 @@
                       %form{:action => "/actions/cancel_process", :method => "post"}
                         %input{:type => "submit", :value => (_ :cancel_process), :class => "button", :style => "float:left" }
                     - if CCProcess.refresh_time
-                      Update log in
+                      = _ :update_log_in
                       %b#countdown
                       :javascript
                         $("#countdown").countdown(#{CCProcess.refresh_time}, "s");
@@ -80,7 +81,7 @@
                         = _ :operation_failed
 
           .progress(id="progress_scroller")
-            %table(class="progress_table #{CCProcess.result_class}")
+            %table(class="progress_table #{CCProcess.result_class} rounded_table_btm")
               %tbody
                 %tr
                   %td

@@ -76,15 +76,26 @@ html, body
   z-index: 99
   background-color: rgba(45, 91, 112, 0.6)
 
+.rounded_table_top
+  border-top-left-radius: 8px
+  border-top-right-radius: 8px
+
+.rounded_table_btm
+  border-top-right-radius: 8px
+  border-bottom-left-radius: 8px
+  border-bottom-right-radius: 8px
+
 .progress
   position: absolute
   top: 180px
   left: $menu_width + 10
-  height: 50%
+  height: auto !important
+  max-height: 50%
   overflow: auto
   z-index: 100
   font-family: monospace
   color: #e3ebed
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.2)
 
 .progress_noscroll
   position: absolute
@@ -94,6 +105,7 @@ html, body
   z-index: 100
   font-family: monospace
   color: #e3ebed
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.2)
 
 .flash_blocker
   position: fixed
@@ -233,9 +245,8 @@ body
   font-size: 18px
 
 .progress_table
-  padding: 10px
+  padding: 5px
   border-spacing: 5px
-  box-shadow: 3px 3px 5px rgba(0,0,0,0.2)
   min-width: 100%
   max-width: 100%
 
@@ -321,18 +332,23 @@ input[disabled]
 
 .button_link
   margin-top: 2px
-  padding-bottom: 2px
   padding-left: 10px
   padding-right: 10px
+  padding-bottom: 2px
   background-color: rgba(0, 160, 212, 0.3)
-  border: none
   color: #e3ebed
   text-decoration: none
   font-weight: bold
+  border-radius: 8px
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2)
+
+.button_link:hover
+  color: #1b2a44
 
 .button
   margin-right: 7px
-  radius: 8px
+  border-radius: 8px
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2)
 
 .button:hover
   color: #1b2a44
@@ -341,15 +357,16 @@ input[disabled]
   background: transparent
   width: 300px
   font-size: 16px
-  line-height: 1
-  border: 0
-  border-radius: 0
   height: 24px
   appearance: none
   -moz-appearance: none
   -webkit-appearance: none
   background-color: rgba(188, 207, 207, 0.5)
   color: #e3ebed
+  border: 0px
+  border-radius: 8px
+  padding-left: 5px
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2)
 
 .styled_select
   width: 280px
