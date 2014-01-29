@@ -235,21 +235,21 @@
     <name>operation_progress</name>
     <message>
         <source>operation progress</source>
-        <translation>Operation Progress</translation>
+        <translation>Task running</translation>
     </message>
 </context>
 <context>
     <name>operation_success</name>
     <message>
         <source>operation_success</source>
-        <translation>Operation Successful</translation>
+        <translation>Task successful</translation>
     </message>
 </context>
 <context>
     <name>operation_failed</name>
     <message>
         <source>operation_failed</source>
-        <translation>Operation Failed</translation>
+        <translation>Task failed</translation>
     </message>
 </context>
 
@@ -609,6 +609,20 @@
   </message>
 </context>
 <context>
+  <name>provider_notok</name>
+  <message>
+    <source>provider_notok</source>
+    <translation>Not OK</translation>
+  </message>
+</context>
+<context>
+  <name>provider_ok</name>
+  <message>
+    <source>provider_ok</source>
+    <translation>OK</translation>
+  </message>
+</context>
+<context>
   <name>Providers_body</name>
   <message>
     <source>Providers_body</source>
@@ -748,8 +762,24 @@
 <context>
     <name>process_killed</name>
     <message>
-        <source>process killed</source>
+        <source>process_killed</source>
         <translation>process killed</translation>
+    </message>
+</context>
+
+<!-- sdk_helper -->
+<context>
+    <name>installing_package</name>
+    <message>
+        <source>installing_package</source>
+        <translation>installing package</translation>
+    </message>
+</context>
+<context>
+    <name>removing_package</name>
+    <message>
+        <source>removing_package</source>
+        <translation>removing package</translation>
     </message>
 </context>
 

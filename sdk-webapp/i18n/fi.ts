@@ -237,21 +237,21 @@
     <name>operation_progress</name>
     <message>
         <source>operation progress</source>
-        <translation>Tehtävä Edistyy</translation>
+        <translation>Tehtävä käynnissä</translation>
     </message>
 </context>
 <context>
     <name>operation_success</name>
     <message>
         <source>operation_success</source>
-        <translation>Tehtävä Onnistui</translation>
+        <translation>Tehtävä onnistui</translation>
     </message>
 </context>
 <context>
     <name>operation_failed</name>
     <message>
         <source>operation_failed</source>
-        <translation>Tehtävä Epäonnistui</translation>
+        <translation>Tehtävä epäonnistui</translation>
     </message>
 </context>
 
@@ -323,8 +323,7 @@
     <name>delete</name>
     <message>
         <source>delete</source>
-<!-- this cannot be translated, otherwise it is not a delete method -->
-        <translation>delete</translation>
+        <translation>poista</translation>
     </message>
 </context>
 
@@ -626,6 +625,20 @@
   </message>
 </context>
 <context>
+  <name>provider_notok</name>
+  <message>
+    <source>provider_notok</source>
+    <translation>Virhe</translation>
+  </message>
+</context>
+<context>
+  <name>provider_ok</name>
+  <message>
+    <source>provider_ok</source>
+    <translation>OK</translation>
+  </message>
+</context>
+<context>
   <name>provider</name>
   <message>
     <source>provider</source>
@@ -751,8 +764,24 @@
 <context>
     <name>process_killed</name>
     <message>
-        <source>process killed</source>
+        <source>process_killed</source>
         <translation>prosessi tapettu</translation>
+    </message>
+</context>
+
+<!-- sdk_helper -->
+<context>
+    <name>installing_package</name>
+    <message>
+        <source>installing_package</source>
+        <translation>asennetaan pakettia</translation>
+    </message>
+</context>
+<context>
+    <name>removing_package</name>
+    <message>
+        <source>removing_package</source>
+        <translation>poistetaan pakettia</translation>
     </message>
 </context>
 

@@ -45,7 +45,8 @@
               %td.install_button
                 - if installed
                   %form{:action => "/#{@language}/targets/#@target/#{package}", :method => "post"}
-                    %input{:type => "submit", :value => (_ :delete), :class => "button", :name=> "_method"}
+                    %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                    %input{:type => "hidden", :value => "delete", :name => "_method"}
   .clear
   :javascript
     // Pass in a list of things to hide/show

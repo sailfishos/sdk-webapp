@@ -14,7 +14,8 @@
                 = _(:manage)
             %td.delete_button
               %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
-                %input{:type => "submit", :value => (_ :delete), :class => "button", :name=> "_method"}
+                %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                %input{:type => "hidden", :value => "delete", :name => "_method" }
             -# if target.has_update
               %td.upgrade_button
                 %form{:action => "/targets/#{target}/upgrade", :method => "post"}
