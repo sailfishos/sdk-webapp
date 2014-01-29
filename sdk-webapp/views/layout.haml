@@ -55,7 +55,7 @@
       - if CCProcess.exists
         .progress_blocker
           .progress_noscroll
-            %table(class="progress_table #{CCProcess.result_class}")
+            %table(class="progress_table #{CCProcess.result_class} rounded_table_top")
               %tbody
                 %tr
                   %td
@@ -81,7 +81,7 @@
                         = _ :operation_failed
 
           .progress(id="progress_scroller")
-            %table(class="progress_table #{CCProcess.result_class}")
+            %table(class="progress_table #{CCProcess.result_class} rounded_table_btm")
               %tbody
                 %tr
                   %td

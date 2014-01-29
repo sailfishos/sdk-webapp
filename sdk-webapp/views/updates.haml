@@ -51,8 +51,8 @@
       - Target.each do |target|
         %tr
           %td
-            #{target.name}
-            %td
+            &bull; #{target.name}
+            %td{:style => "white-space: nowrap;"}
               - if target.update_available?
                 %form{:action => "/#{@language}/targets/#{target.name}/update", :method => "post"}
                   %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "t#{target.id}_update"}

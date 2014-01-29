@@ -1,10 +1,13 @@
 .content
+  .page_header
+    = _ :manage_targets
+
+  #target_summary
+    =_(:target_summary)
+
   #targets_table.update_section
-    .page_header
-      = _ :manage_targets
     %table
       %tbody
-        =_(:target_summary)
         - Target.each do |target|
           %tr
             %td.element_name
