@@ -422,3 +422,40 @@ input[disabled]
 
   table td:last-child
     border-right: none
+
+
+=animation($animate...)
+  $max: length($animate)
+  $animations: ''
+  @for $i from 1 through $max
+    $animations: #{$animations + nth($animate, $i)}
+    @if $i < $max
+      $animations: #{$animations + ", "}
+  -webkit-animation: $animations
+  -moz-animation:    $animations
+  -o-animation:      $animations
+  animation:         $animations
+
+=keyframes($animationName)
+  @-webkit-keyframes #{$animationName}
+    @content
+  @-moz-keyframes #{$animationName}
+    @content
+  @-o-keyframes #{$animationName}
+    @content
+  @keyframes #{$animationName}
+    @content
+
++keyframes(pulse)
+  0%
+    color: #75efb3
+    text-shadow: 0 0 10px #e7ff0d
+  50%
+    color: #ffffff
+    text-shadow: 0 0 10px #75efb3
+  100%
+    color: #e7ff0d
+    text-shadow: 0 0 10px #ffffff
+
+.shiny_anim
+  @include animation('pulse .75s 3')
