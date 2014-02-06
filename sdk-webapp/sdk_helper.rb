@@ -62,7 +62,8 @@ class SdkHelper < Sinatra::Base
 # harbour_tools
   get '/:locale/harbour_tools/?' do
     locale_set
-    CCProcess.get_output(3, 0, 0)
+    # update every 3 seconds, no tail updates, no stderr, ansi colors
+    CCProcess.get_output(3, 0, 0, 1)
     haml :harbour_tools, :locals => { :tab => :harbour_tools }
   end
 
@@ -154,7 +155,6 @@ class SdkHelper < Sinatra::Base
   #clear the operation progress output
   post '/actions/clear_output' do
     CCProcess.clear
-    CCProcess.get_output
     redirect back
   end
 
