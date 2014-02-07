@@ -2,11 +2,12 @@ require './shell_process'
 
 class CCProcess
   class Failed < Exception; end
-  @@process=@@status_out=@@refresh_time=@@process_exitstatus=@@cancellable=nil
+  @@process=@@status_out=@@refresh_time=@@process_exitstatus=nil
+  @@cancellable=@@cancelled=0
+  # progress background color
+  @@process_result_class = "process_result_ok fader_ok"
 
   def self.get_output(refresh_period=5, tail_update=1, errors=1, ansi_colors=0)
-    # progress background color
-    @@process_result_class = "process_result_ok fader_ok"
 
     if @@process
       @@refresh_time = refresh_period
@@ -104,18 +105,25 @@ class CCProcess
     @@cancellable
   end
 
+  def self.cancelled
+    @@cancelled
+  end
+
   def self.cancel(signal=1)
-    if @@process and @@cancellable
-      @@process.reap(signal)
-      @@refresh_time = @@process = nil
+    if @@process and @@cancellable == 1
       @@process_result_class = "process_result_fail fader_fail"
-      @@process_exit = @@process_description + " - " + (_ :process_killed)
+      @@cancelled = 1
+      @@process.reap(signal)
+      @@process = @@refresh_time = nil
     end
   end
 
   def self.start(command, description, timeout, cancellable=0)
     return false if @@process
+    # progress background color
+    @@process_result_class = "process_result_ok fader_ok"
     @@cancellable = cancellable
+    @@cancelled = 0
     @@process_tail = ""
     @@process_description = description
     @@process_timeout = timeout

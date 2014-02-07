@@ -75,6 +75,8 @@
                     .progress_header
                       - if CCProcess.is_running
                         = _ :operation_progress
+                      - elsif CCProcess.cancelled == 1
+                        = _ :operation_cancelled
                       - elsif CCProcess.exit_status == 0
                         = _ :operation_success
                       - else
