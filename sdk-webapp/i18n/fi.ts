@@ -254,6 +254,13 @@
         <translation>Tehtävä epäonnistui</translation>
     </message>
 </context>
+<context>
+    <name>operation_cancelled</name>
+    <message>
+        <source>operation_canelled</source>
+        <translation>Tehtävä peruttu</translation>
+    </message>
+</context>
 
 <!-- views/packages.haml -->
 <context>

@@ -252,6 +252,13 @@
         <translation>Task failed</translation>
     </message>
 </context>
+<context>
+    <name>operation_cancelled</name>
+    <message>
+        <source>operation_canelled</source>
+        <translation>Task cancelled</translation>
+    </message>
+</context>
 
 <!-- views/packages.haml -->
 <context>
