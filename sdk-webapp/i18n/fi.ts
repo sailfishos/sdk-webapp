@@ -281,7 +281,7 @@
     <name>explain_sync</name>
     <message>
         <source>explain_sync</source>
-        <translation>Mikäli päivität käännöskohdetta käsin, voit synkata käännöskoneen QtCreatorin kanssa</translation>
+        <translation>Synkkaa tiedot Qt Creatorin kanssa mikäli olet päivittänyt käännöskohdetta käsin</translation>
     </message>
 </context>
 <context>
@@ -309,7 +309,7 @@
     <name>search_is_active</name>
     <message>
         <source>search_is_active</source>
-        <translation>Etsin</translation>
+        <translation>Etsin ...</translation>
     </message>
 </context>
 <context>
@@ -778,17 +778,17 @@
 
 <!-- sdk_helper -->
 <context>
-    <name>installing_package</name>
+    <name>installing_packages</name>
     <message>
-        <source>installing_package</source>
-        <translation>asennetaan pakettia</translation>
+        <source>installing_packages</source>
+        <translation>asennetaan paketteja</translation>
     </message>
 </context>
 <context>
-    <name>removing_package</name>
+    <name>removing_packages</name>
     <message>
-        <source>removing_package</source>
-        <translation>poistetaan pakettia</translation>
+        <source>removing_packages</source>
+        <translation>poistetaan paketteja</translation>
     </message>
 </context>
 

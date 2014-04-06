@@ -1,57 +1,82 @@
 .content
-  .page_header
-    = _(:manage_target) + ': ' + @target
-  #manage
-    %div.sync_button
-      %form{:action => "/#{@language}/targets/#{@target}/sync", :method => :post}
-        %input{:type => 'submit', :value => (_ :sync), :class => "button", :name => "_method"}
-          = _(:explain_sync)
-          %br
-          %br
-    %div.sync_button
-      %form{:action => "/#{@language}/targets/#{@target}/refresh", :method => :post}
-        %input{:type => 'submit', :value => (_ :refresh), :class => "button", :name => "_method"}
-          = _(:explain_refresh)
-          %br
-          %br
-    -# %div.packages_button
-      %a{:href => "/#{@language}/targets/#{@target}/packages", :class => "button button_link"}
-        = _(:manage_packages)
-      = _(:explain_packages)
-  .clear
+  #manage.target_manage_style
+    .page_header
+      = _(:manage_target) + ': ' + @target
+    %table
+      %tbody
+        %tr
+          %td
+            %form{:action => "/#{@language}/targets/#{@target}/sync", :method => :post}
+              %input{:type => 'submit', :value => (_ :sync), :class => "button", :name => "_method"}
+          %td
+            = _(:explain_sync)
+        %tr
+          %td
+            %form{:action => "/#{@language}/targets/#{@target}/refresh", :method => :post}
+              %input{:type => 'submit', :value => (_ :refresh), :class => "button", :name => "_method"}
+          %td
+            = _(:explain_refresh)
+    %br
+    #packages_to_install
+      %table#install_table.package_list_table_style
+        %tbody
+          %tr
+            %td
+              %form#install_pkg_form{:action => "/#{@language}/targets/#@target/packages", :name => "#@target", :method => "post"}
+                %input{:type => "submit", :value => (_ :install), :class => "button"}
+                %input#install_input{:type => "hidden", :value => "", :name => "pkglist", :class => "button"}
+            %td#install_list
+            %td
+              %input{:type => "button", :value => (_ :clear_progress), :class => "button", :onclick => 'clear_selections("install")'}
 
-  #packages_table
+      %table#delete_table.pakage_list_table_style
+        %tbody
+          %tr
+            %td
+              %form#delete_pkg_form{:action => "/#{@language}/targets/#@target/delete_packages", :name => "#@target", :method => "post"}
+                %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                %input#delete_input{:type => "hidden", :value => "", :name => "pkglist", :class => "button"}
+            %td#delete_list
+            %td
+              %input{:type => "button", :value => "clear", :class => "button", :onclick => 'clear_selections("delete")'}
+      %script
+        // Hide the tables on first load
+        $("#install_table").hide();
+        $("#delete_table").hide();
+    %br
+    %div{:id => "search_done"}
+      = _(:search_for_packages)
+    %div{:id => "search_active"}
+      = _(:search_is_active)
+    %br
     %form{:action => "/#{@language}/targets/add", :method => 'post'}
       %input{:id => "search", :type => "text", :autocomplete => "off", :onkeyup => "pkgFilter.run(this)", :class => "button parameter_text_field"}
-      %br
-      %br
-      %div{:id => "search_done"}
-        = _(:search_for_packages)
-      %div{:id => "search_active"}
-        = _(:search_is_active)
-      %table
-        %tbody{:id => "packagelist"}
+
+    #packages_table.package_selection_table_style
+      %table.package_list_table_style
+        %tbody#packagelist
           %script
             // Hide the packagelist on first load
             $("#packagelist").hide();
           - @package_list.each_with_index do |(package, installed), count|
             %tr{:id => count}
-              %td.element_name
+              %td.package_selection_element
                 #{package}
-              %td.install_button
+              %td.package_list_table_cbox_cell
                 - if not installed
-                  %form{:action => "/#{@language}/targets/#@target/#{package}", :method => "post"}
-                    %input{:type => "submit", :value => (_ :install), :class => "button"}
-              %td.install_button
+                  %label{:style => "white-space:nowrap" }
+                    %input{:class => "install_checkbox", :name => "#{package}", :type => "checkbox", :onchange => 'update_list("install", this.checked, this.name)'}
+                      #{_ :install}
+              %td.package_list_table_cbox_cell
                 - if installed
-                  %form{:action => "/#{@language}/targets/#@target/#{package}", :method => "post"}
-                    %input{:type => "submit", :value => (_ :delete), :class => "button"}
-                    %input{:type => "hidden", :value => "delete", :name => "_method"}
+                  %label{:style => "white-space:nowrap" }
+                    %input{:class => "delete_checkbox", :name => "#{package}", :type => "checkbox", :onchange => 'update_list("delete", this.checked, this.name)'}
+                      #{_ :delete}
   .clear
+
   :javascript
     // Pass in a list of things to hide/show
     var pkgFilter = new Filter($("#packagelist > tr"));
-    //pkgFilter.hide_action = false;
     // given one 'thing' return the text to use for filtering
     pkgFilter.gettext = function(el) {
       return $(el).find("td:first").text();
@@ -59,15 +84,53 @@
     pkgFilter.on_empty = function() {
       $("#search_done").hide();
       $("#search_active").hide();
-      //$("#packagelist").hide(); 
     }
     pkgFilter.on_active = function() {
       $("#search_done").hide();
       $("#search_active").show();
-      //$("#packagelist").hide();
     }
     pkgFilter.on_inactive = function() {
       $("#search_active").hide();
       $("#search_done").show();
+      // make every other visible row a bit darker
+      $("#packagelist tr:visible").each(function(i) {
+         $(this).css("background-color", (i%2 ? "": "rgba(0,0,0,.1)"));
+      });
       $("#packagelist").show();
+      $("#packagelist").scrollTop();
+    }
+    function update_list(selection, checked, pkg) {
+
+      var curlist=document.getElementById(selection+"_list").innerHTML;
+      document.getElementById(selection+"_table").style.display="block";
+
+      if (checked) {
+        curlist=pkg+" "+curlist;
+      }
+      else {
+        // try to match the package name and replace it with nothing
+        curlist=curlist.replace(new RegExp(pkg+"[ $]"), "");
+      }
+
+      // do not trim the innerHTML because the delete operation likes
+      // to find a space after each package name
+      document.getElementById(selection+"_list").innerHTML = curlist;
+
+      var trimmed=$.trim(curlist);
+      // trim the value because this is sent to the server
+      document.getElementById(selection+"_input").value = trimmed;
+      if (trimmed === "") {
+        document.getElementById(selection+"_table").style.display="none";
+      }
+    }
+    function clear_selections(selection) {
+       document.getElementById(selection+"_list").innerHTML="";
+       document.getElementById(selection+"_input").value = "";
+
+       var boxes=document.getElementsByClassName(selection+"_checkbox");
+
+       for (var i=0; i < boxes.length; ++i)
+         boxes[i].checked = false;
+
+       document.getElementById(selection+"_table").style.display="none";
     }

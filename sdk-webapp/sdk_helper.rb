@@ -247,20 +247,26 @@ class SdkHelper < Sinatra::Base
     redirect back
   end
 
-  #install package
-  post '/:locale/targets/:target/:package' do
+  #install a list of packages
+  post '/:locale/targets/:target/packages' do
+    locale_set
     target = params[:target]
-    package = params[:package]
-    package_install(target, package)
-    redirect to("/"+params[:locale]+'/targets/' + target)
+    if params[:pkglist]
+      packages = params[:pkglist]
+      package_install(target, packages)
+    end
+    redirect back
   end
 
-  #remove package
-  delete '/:locale/targets/:target/:package' do
+  # remove a list of packages
+  post '/:locale/targets/:target/delete_packages' do
+    locale_set
     target = params[:target]
-    package = params[:package]
-    package_remove(target, package)
-    redirect to('/'+params[:locale]+'/targets/' + target)
+    if params[:pkglist]
+      packages = params[:pkglist]
+      package_remove(target, packages)
+    end
+    redirect back
   end
 
 
@@ -310,11 +316,11 @@ class SdkHelper < Sinatra::Base
     end
 
     def package_install(target, package)
-      CCProcess.start("sdk-manage --devel --install '#{target}' '#{package}'", (_ :installing_package) + " #{package}", 60*60)
+      CCProcess.start("sdk-manage --devel --install '#{target}' '#{package}'", (_ :installing_packages), 60*60)
     end
 
     def package_remove(target, package)
-      CCProcess.start("sdk-manage --devel --remove '#{target}' '#{package}'", (_ :removing_package) +" #{package}", 60*15)
+      CCProcess.start("sdk-manage --devel --remove '#{target}' '#{package}'", (_ :removing_packages), 60*60)
     end
   end
 

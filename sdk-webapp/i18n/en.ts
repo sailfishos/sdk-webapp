@@ -279,7 +279,7 @@
     <name>explain_sync</name>
     <message>
         <source>explain_sync</source>
-        <translation>If you manually update the target in the build engine you can re-sync with QtCreator</translation>
+        <translation>Re-sync with Qt Creator if you have manually updated target in the build engine</translation>
     </message>
 </context>
 <context>
@@ -300,14 +300,14 @@
     <name>search_for_packages</name>
     <message>
         <source>search_for_packages</source>
-        <translation>Type to find packages (use a space to add search terms)</translation>
+        <translation>Type to find packages (use space to add search terms)</translation>
     </message>
 </context>
 <context>
     <name>search_is_active</name>
     <message>
         <source>search_is_active</source>
-        <translation>Searching</translation>
+        <translation>Searching ...</translation>
     </message>
 </context>
 <context>
@@ -776,17 +776,17 @@
 
 <!-- sdk_helper -->
 <context>
-    <name>installing_package</name>
+    <name>installing_packages</name>
     <message>
-        <source>installing_package</source>
-        <translation>installing package</translation>
+        <source>installing_packages</source>
+        <translation>installing packages</translation>
     </message>
 </context>
 <context>
-    <name>removing_package</name>
+    <name>removing_packages</name>
     <message>
-        <source>removing_package</source>
-        <translation>removing package</translation>
+        <source>removing_packages</source>
+        <translation>removing packages</translation>
     </message>
 </context>
 

@@ -19,10 +19,6 @@
               %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
                 %input{:type => "submit", :value => (_ :delete), :class => "button"}
                 %input{:type => "hidden", :value => "delete", :name => "_method" }
-            -# if target.has_update
-              %td.upgrade_button
-                %form{:action => "/targets/#{target}/upgrade", :method => "post"}
-                  %input{:type => "submit", :value => "upgrade", :class => "button"}
             - if ! target.is_known
               %td.upgrade_button
                 %form{:action => "/#{@language}/targets/#{target.name}/upgrade", :method => "post"}
