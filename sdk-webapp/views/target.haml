@@ -92,12 +92,12 @@
     pkgFilter.on_inactive = function() {
       $("#search_active").hide();
       $("#search_done").show();
+      $("#packagelist").show();
+      $("#packagelist").scrollTop();
       // make every other visible row a bit darker
       $("#packagelist tr:visible").each(function(i) {
          $(this).css("background-color", (i%2 ? "": "rgba(0,0,0,.1)"));
       });
-      $("#packagelist").show();
-      $("#packagelist").scrollTop();
     }
     function update_list(selection, checked, pkg) {
 
