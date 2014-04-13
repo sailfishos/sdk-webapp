@@ -16,7 +16,7 @@ License:    GPLv2+
 URL:        https://github.com/sailfish-sdk/sdk-webapp
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  sdk-webapp.yaml
-Requires:   sdk-webapp-bundle >= 0.6.0+sdk
+Requires:   sdk-webapp-bundle >= 0.4.0
 Requires:   sdk-webapp-customization >= 0.4.0-2
 Requires:   sdk-utils >= 0.57
 Requires:   sdk-register >= 0.4
@@ -104,7 +104,7 @@ cp systemd/%{name}.service %{buildroot}%{_unitdir}/
 %{_libdir}/%{name}-bundle/public/ttf
 %{_libdir}/%{name}-bundle/public/css
 %{_libdir}/%{name}-bundle/.sass-cache/
-%dir %{_libdir}/%{name}-bundle/config
+%dir %attr(1777,mersdk,mersdk) %{_libdir}/%{name}-bundle/config
 # >> files
 # << files
 
