@@ -61,7 +61,7 @@ Filter.prototype.do_next_chunk = function() {
 	var thiz=this;
         $.each(this.value.split(" "),
 	       function() {
-		   if (text.search(this) < 0) {
+		   if (!text.match(new RegExp(this, "i"))) {
 		       show=false;
 		   }
                });
