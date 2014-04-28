@@ -31,7 +31,7 @@ class Harbour
       do_beta="--beta"
     end
 
-    CCProcess.start("rpmvalidation-wrapper.sh #{do_updates} #{do_beta} -r #{filename}", (_ :validating_rpm) + " #{basename}", 60*60, 1)
+    CCProcess.start("rpmvalidation-wrapper.sh #{do_updates} #{do_beta} -r '#{filename}'", (_ :validating_rpm) + " #{basename}", 60*60, 1)
   end
 
   def self.updates_readable
