@@ -255,7 +255,7 @@
 <context>
     <name>operation_cancelled</name>
     <message>
-        <source>operation_canelled</source>
+        <source>operation_cancelled</source>
         <translation>Task cancelled</translation>
     </message>
 </context>
