@@ -50,6 +50,11 @@ class Harbour
     _ (@@beta ? :harbour_beta_enabled : :harbour_beta_disabled)
   end
 
+  def self.beta_class
+    (@@beta ? "button_beta" : "button")
+  end
+
+
   def self.beta=(val)
     @@beta = val
   end

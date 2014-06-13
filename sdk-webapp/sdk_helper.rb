@@ -87,7 +87,7 @@ class SdkHelper < Sinatra::Base
       { value: Harbour.updates_readable, state: Harbour.updates }.to_json
     elsif params[:beta]
       Harbour.beta=!(params[:beta] == "true")
-      { value: Harbour.beta_readable, state: Harbour.beta }.to_json
+      { value: Harbour.beta_readable, state: Harbour.beta, class: Harbour.beta_class }.to_json
     end
   end
 
