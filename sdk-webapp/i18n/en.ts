@@ -56,21 +56,21 @@
     <name>RPM_validator</name>
     <message>
         <source>RPM_validator</source>
-        <translation>RPM validator</translation>
+        <translation>RPM Validator</translation>
     </message>
 </context>
 <context>
     <name>rpm_validator_summary</name>
     <message>
         <source>rpm_validator_summary</source>
-        <translation>Use the RPM validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs similar checks to the Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
+        <translation>Use the RPM Validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs similar checks to the Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
     </message>
 </context>
 <context>
     <name>rpm_validator_disclaimer</name>
     <message>
         <source>rpm_validator_disclaimer</source>
-        <translation>DISCLAIMER: A successful result from the RPM validator tool does not guarantee that your application is accepted to Harbour.</translation>
+        <translation>DISCLAIMER: A successful result from the RPM Validator tool does not guarantee that your application is accepted to Harbour.</translation>
     </message>
 </context>
 <context>
@@ -149,7 +149,7 @@
     <name>upgrade</name>
     <message>
         <source>upgrade</source>
-        <translation>upgrade</translation>
+        <translation>Upgrade</translation>
     </message>
 </context>
 
@@ -228,7 +228,7 @@
     <name>clear_progress</name>
     <message>
         <source>clear_progress</source>
-        <translation>clear</translation>
+        <translation>Clear</translation>
     </message>
 </context>
 <context>
@@ -272,7 +272,7 @@
     <name>sync</name>
     <message>
         <source>sync</source>
-        <translation>sync</translation>
+        <translation>Sync</translation>
     </message>
 </context>
 <context>
@@ -286,7 +286,7 @@
     <name>refresh</name>
     <message>
         <source>refresh</source>
-        <translation>refresh</translation>
+        <translation>Refresh</translation>
     </message>
 </context>
 <context>
@@ -307,7 +307,7 @@
     <name>search_is_active</name>
     <message>
         <source>search_is_active</source>
-        <translation>Searching ...</translation>
+        <translation>Searching…</translation>
     </message>
 </context>
 <context>
@@ -321,14 +321,14 @@
     <name>install</name>
     <message>
         <source>install</source>
-        <translation>install</translation>
+        <translation>Install</translation>
     </message>
 </context>
 <context>
     <name>delete</name>
     <message>
         <source>delete</source>
-        <translation>delete</translation>
+        <translation>Delete</translation>
     </message>
 </context>
 
@@ -338,7 +338,7 @@
     <name>manage_packages</name>
     <message>
         <source>manage_packages</source>
-        <translation>packages</translation>
+        <translation>Packages</translation>
     </message>
 </context>
 <context>
@@ -361,14 +361,14 @@
     <name>add_new_target</name>
     <message>
         <source>add new target</source>
-        <translation>Add New Target</translation>
+        <translation>Add a New Target</translation>
     </message>
 </context>
 <context>
     <name>from_list</name>
     <message>
         <source>Pre-configured targets</source>
-        <translation>Pre-configured targets</translation>
+        <translation>Pre-configured Targets</translation>
     </message>
 </context>
 <context>
@@ -382,28 +382,28 @@
     <name>select_target</name>
     <message>
         <source>select_target</source>
-        <translation>select a target</translation>
+        <translation>Select a Target</translation>
     </message>
 </context>
 <context>
     <name>select_toolchain</name>
     <message>
         <source>select_toolchain</source>
-        <translation>select a toolchain</translation>
+        <translation>Select a Toolchain</translation>
     </message>
 </context>
 <context>
     <name>local_template_name</name>
     <message>
         <source>local_template_name</source>
-        <translation>Local target name (optional)</translation>
+        <translation>Local Target Name (Optional)</translation>
     </message>
 </context>
 <context>
     <name>add</name>
     <message>
         <source>add</source>
-        <translation>add</translation>
+        <translation>Add</translation>
     </message>
 </context>
 <context>
@@ -424,20 +424,20 @@
     <name>target_name</name>
     <message>
         <source>target name</source>
-        <translation>target name</translation>
+        <translation>Target Name</translation>
     </message>
 </context>
 <context>
     <name>target_url</name>
     <message>
         <source>target url</source>
-        <translation>target url</translation>
+        <translation>Target URL</translation>
     </message>
 </context>
 <context>
     <name>target_summary</name>
     <message>
-        <source>Target summary</source>
+        <source>Target Summary</source>
         <translation>Each "Target" lets you build apps for specific hardware running a specific OS version.</translation>
     </message>
 </context>
@@ -452,7 +452,7 @@
     <name>manage</name>
     <message>
         <source>manage</source>
-        <translation>manage</translation>
+        <translation>Manage</translation>
     </message>
 </context>
 <context>
@@ -498,7 +498,7 @@
     <name>installed</name>
     <message>
         <source>installed</source>
-        <translation>installed</translation>
+        <translation>Installed</translation>
     </message>
 </context>
 
@@ -514,7 +514,7 @@
     <name>check_for_updates</name>
     <message>
         <source>check_for_updates</source>
-        <translation>Check for updates now</translation>
+        <translation>Check for Updates Now</translation>
     </message>
 </context>
 <context>
@@ -528,7 +528,7 @@
     <name>refreshing_repos</name>
     <message>
         <source>refreshing_repos</source>
-        <translation>checking ...</translation>
+        <translation>Checking…</translation>
     </message>
 </context>
 <context>
@@ -556,7 +556,7 @@
   <name>updating_engine</name>
   <message>
     <source>updating_engine</source>
-    <translation>Updating SDK Engine</translation>
+    <translation>Updating SDK engine</translation>
   </message>
 </context>
 <context>
@@ -661,14 +661,14 @@
   <name>provider_url</name>
   <message>
     <source>provider_url</source>
-    <translation>Provider JSON Url</translation>
+    <translation>Provider JSON URL</translation>
   </message>
 </context>
 <context>
   <name>provider_status</name>
   <message>
     <source>provider_status</source>
-    <translation>JSON Url status</translation>
+    <translation>JSON URL Status</translation>
   </message>
 </context>
 <!-- views/.haml -->
@@ -686,14 +686,14 @@
     <name>set_as_default</name>
     <message>
         <source>set as default</source>
-        <translation>set as default</translation>
+        <translation>Set as Default</translation>
     </message>
 </context>
 <context>
     <name>default</name>
     <message>
         <source>default</source>
-        <translation>default</translation>
+        <translation>Default</translation>
     </message>
 </context>
 <context>
@@ -728,49 +728,49 @@
     <name>adding_target</name>
     <message>
         <source>adding_target</source>
-        <translation>adding target</translation>
+        <translation>Adding target</translation>
     </message>
 </context>
 <context>
     <name>removing_target</name>
     <message>
         <source>removing target</source>
-        <translation>removing target</translation>
+        <translation>Removing target</translation>
     </message>
 </context>
 <context>
     <name>upgrading_sdk</name>
     <message>
         <source>upgrading sdk</source>
-        <translation>upgrading sdk</translation>
+        <translation>Upgrading SDK</translation>
     </message>
 </context>
 <context>
     <name>finished</name>
     <message>
         <source>finished</source>
-        <translation>finished</translation>
+        <translation>Finished</translation>
     </message>
 </context>
 <context>
     <name>exited_with_status</name>
     <message>
         <source>exited with status</source>
-        <translation>exited with status</translation>
+        <translation>Exited with status</translation>
     </message>
 </context>
 <context>
     <name>timeout</name>
     <message>
         <source>timeout</source>
-        <translation>timeout</translation>
+        <translation>Timeout</translation>
     </message>
 </context>
 <context>
     <name>process_killed</name>
     <message>
         <source>process_killed</source>
-        <translation>process killed</translation>
+        <translation>Process killed</translation>
     </message>
 </context>
 
@@ -779,14 +779,14 @@
     <name>installing_packages</name>
     <message>
         <source>installing_packages</source>
-        <translation>installing packages</translation>
+        <translation>Installing packages</translation>
     </message>
 </context>
 <context>
     <name>removing_packages</name>
     <message>
         <source>removing_packages</source>
-        <translation>removing packages</translation>
+        <translation>Removing packages</translation>
     </message>
 </context>
 
