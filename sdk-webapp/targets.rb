@@ -6,7 +6,7 @@ require './process.rb'
 # Refreshing is carried out by a systemd timer
 class Target
   include Enumerable
-  attr_accessor :name, :url, :toolchain
+  attr_accessor :name, :url, :tooling
   @@all_targets=[]
   @@targets=[]
   UPDATE_VALID_PERIOD=7200
@@ -22,9 +22,13 @@ class Target
     @id = @@targets.size - 1
   end
 
-  # Installs a target to the filesystem and sb2 using a url/toolchain pair
-  def create(url, toolchain)
-    CCProcess.start("sdk-manage --target --install '#{@name}' '#{toolchain}' '#{url}'", (_ :adding_target) + " #{@name}", 60*60, 1)
+  # Installs a target to the filesystem and sb2
+  def create(url, tooling_name, tooling_url, toolchain)
+    CCProcess.start("sdk-manage --target --install '#{@name}' '#{url}'" +
+                    (tooling_name.to_s.empty? ? "" : " --tooling '#{tooling_name}'") +
+                    (tooling_url.to_s.empty? ? "" : " --tooling-url '#{tooling_url}'") +
+                    (toolchain.to_s.empty? ? "" : " --toolchain '#{toolchain}'"),
+                    (_ :adding_target) + " #{@name}", 60*60, 1)
   end
 
   # Removes a target from the fs and sb2
@@ -92,7 +96,12 @@ class Target
   # Some class methods to handle iteration and save/load
 
   def self.load
-    @@all_targets = CCProcess.complete("sdk-manage --target --list").split.map{ |n| self.get(n) }
+    @@all_targets = CCProcess.complete("sdk-manage --target --list --long").lines.map do |row|
+      name, tooling = row.chomp.split
+      target = self.get(name)
+      target.tooling = tooling
+      target
+    end
     @@targets = @@all_targets.keep_if {|t| t.is_known }
   rescue CCProcess::Failed
     @@targets = []
@@ -149,8 +158,20 @@ class Target
     end
   end
 
+  def self.each_using_tooling(tooling)
+    for t in @@targets do
+      if t.tooling == tooling
+        yield t
+      end
+    end
+  end
+
   def self.all
     @@targets
+  end
+
+  def self.all_using_tooling(tooling)
+    @@targets.select { |t| t.tooling == tooling }
   end
 
   def self.delete(id)

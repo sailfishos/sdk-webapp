@@ -48,10 +48,30 @@
     = _"Targets_body"
 
     %table
-      - Target.each do |target|
+      - Tooling.each do |tooling|
         %tr
-          %td
-            &bull; #{target.name}
+          %td.tooling_name
+            &bull; #{tooling.name}
+          %td{:style => "white-space: nowrap;"}
+            - if tooling.update_available?
+              %form{:action => "/#{@language}/toolings/#{tooling.name}/update", :method => "post"}
+                %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "t#{tooling.id}_update"}
+              %div.update_details{:id => "t#{tooling.id}_update_details"}
+                Update Details
+                %pre
+                  = preserve do
+                    :escaped
+                      #{tooling.update_info}
+                :javascript
+                  $("#t#{tooling.id}_update").show_info($("#t#{tooling.id}_update_details"));
+                  $("#t#{tooling.id}_update_details").show_info($("#t#{tooling.id}_update_details"));
+              .clear
+            - else
+              = _ "Uptodate"
+        - Target.each_using_tooling(tooling.name) do |target|
+          %tr
+            %td.target_name
+              &bull; #{target.name}
             %td{:style => "white-space: nowrap;"}
               - if target.update_available?
                 %form{:action => "/#{@language}/targets/#{target.name}/update", :method => "post"}
