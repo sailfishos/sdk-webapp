@@ -13,7 +13,7 @@ Version:    0.6.14
 Release:    1
 Group:      Development Platform/Platform SDK
 License:    GPLv2+
-URL:        https://github.com/sailfish-sdk/sdk-webapp
+URL:        https://github.com/sailfishos/sdk-webapp
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  sdk-webapp.yaml
 Requires:   sdk-webapp-bundle >= 0.4.0
