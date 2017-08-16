@@ -393,9 +393,9 @@
     </message>
 </context>
 <context>
-    <name>local_template_name</name>
+    <name>local_target_name_optional</name>
     <message>
-        <source>local_template_name</source>
+        <source>local target name (optional)</source>
         <translation>Local Target Name (Optional)</translation>
     </message>
 </context>
@@ -414,10 +414,24 @@
     </message>
 </context>
 <context>
-    <name>toolchain</name>
+    <name>toolchain_optional</name>
     <message>
-        <source>toolchain</source>
-        <translation>Toolchain</translation>
+        <source>toolchain (optional)</source>
+        <translation>Toolchain (Optional)</translation>
+    </message>
+</context>
+<context>
+    <name>tooling_name_optional</name>
+    <message>
+        <source>tooling name (optional)</source>
+        <translation>Tooling Name (Optional)</translation>
+    </message>
+</context>
+<context>
+    <name>tooling_url_optional</name>
+    <message>
+        <source>tooling url (optional)</source>
+        <translation>Tooling URL (Optional)</translation>
     </message>
 </context>
 <context>
@@ -438,7 +452,7 @@
     <name>target_summary</name>
     <message>
         <source>Target Summary</source>
-        <translation>Each "Target" lets you build apps for specific hardware running a specific OS version.</translation>
+        <translation>Each "Target" lets you create apps for a specific operating system version running on a specific hardware.  Each target is listed under one "Tooling" supporting the given OS version.</translation>
     </message>
 </context>
 <context>
@@ -577,7 +591,7 @@
   <name>Targets_body</name>
   <message>
     <source>Targets_body</source>
-    <translation>Any updates for the following targets should be applied.</translation>
+    <translation>Any updates for the following toolings and targets should be applied.</translation>
   </message>
 </context>
 <context>
@@ -673,6 +687,21 @@
 </context>
 <!-- views/.haml -->
 <!-- views/.haml -->
+
+<context>
+    <name>removing_tooling</name>
+    <message>
+        <source>removing tooling</source>
+        <translation>Removing tooling</translation>
+    </message>
+</context>
+<context>
+    <name>syncing_tooling</name>
+    <message>
+        <source>syncing tooling</source>
+        <translation>Syncing tooling repos</translation>
+    </message>
+</context>
 
 <context>
     <name>target</name>

@@ -8,21 +8,30 @@
   #targets_table.update_section
     %table
       %tbody
-        - Target.each do |target|
+        - Tooling.each do |tooling|
           %tr
-            %td.element_name
-              #{target.name}
-            %td.element_manage
-              %a.button.manage_link(href='/#{@language}/targets/#{target.name}')
-                = _(:manage)
-            %td.delete_button
-              %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
-                %input{:type => "submit", :value => (_ :delete), :class => "button"}
-                %input{:type => "hidden", :value => "delete", :name => "_method" }
-            - if ! target.is_known
-              %td.upgrade_button
-                %form{:action => "/#{@language}/targets/#{target.name}/upgrade", :method => "post"}
-                  %input{:type => "submit", :value => "sync", :class => "button"}
+            %td.tooling_name
+              #{tooling.name}
+            - if Target.all_using_tooling(tooling.name).empty?
+              %td.delete_button
+                %form{:action => "/#{@language}/toolings/#{tooling.name}", :method => "post"}
+                  %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                  %input{:type => "hidden", :value => "delete", :name => "_method" }
+          - Target.each_using_tooling(tooling.name) do |target|
+            %tr
+              %td.element_name
+                #{target.name}
+              %td.element_manage
+                %a.button.manage_link(href='/#{@language}/targets/#{target.name}')
+                  = _(:manage)
+              %td.delete_button
+                %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
+                  %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                  %input{:type => "hidden", :value => "delete", :name => "_method" }
+              - if ! target.is_known
+                %td.upgrade_button
+                  %form{:action => "/#{@language}/targets/#{target.name}/upgrade", :method => "post"}
+                    %input{:type => "submit", :value => "sync", :class => "button"}
 
   #add_target_wrap
     .page_header
@@ -41,23 +50,13 @@
           .clear
           .parameter.parameter_name
             %label
-              = _ :local_template_name
-            %input#local_template_name{:type => 'text', :name => 'local_template_name', :value => '', :class=> "button parameter_text_field"}
+              = _ :local_target_name_optional
+            %input#local_target_name{:type => 'text', :name => 'local_target_name', :value => '', :class=> "button parameter_text_field"}
           .clear
           %input{:type => 'submit', :value => (_ :add), :class => 'button'}
 
     #manual_target_wrap
       %form{:action => "/#{@language}/targets/add", :method => 'post'}
-        .parameter.parameter_name
-          %label
-            = _ :toolchain
-          .styled_select
-            %select.button.select{:name => "target_toolchain"}
-              %option{:value => -1}=(_ :select_toolchain)
-              - Toolchain.each do |toolchain|
-                - if toolchain.installed
-                  %option{:value => @target_toolchain}=toolchain.name
-        .clear
         .parameter.parameter_name
           %label
             = _ :target_name
@@ -68,7 +67,21 @@
             = _ :target_url
           %input#text_field2{:type => 'text', :name => 'target_url', :value => @target_url, :class=> "button parameter_text_field"}
         .clear
+        .parameter.parameter_name
+          %label
+            = _ :tooling_name_optional
+          %input#text_field3{:type => 'text', :name => 'tooling_name', :value => @tooling_name, :class=> "button parameter_text_field"}
+        .clear
+        .parameter.parameter_name
+          %label
+            = _ :tooling_url_optional
+          %input#text_field4{:type => 'text', :name => 'tooling_url', :value => @tooling_url, :class=> "button parameter_text_field"}
+        .clear
+        .parameter.parameter_name
+          %label
+            = _ :toolchain_optional
+          %input#text_field5{:type => 'text', :name => 'toolchain', :value => @toolchain, :class=> "button parameter_text_field"}
+        .clear
           %input{:type => 'submit', :value => (_ :add), :class => 'button'}
-                  
 
   .clear

@@ -395,9 +395,9 @@
     </message>
 </context>
 <context>
-    <name>local_template_name</name>
+    <name>local_target_name_optional</name>
     <message>
-        <source>local_template_name</source>
+        <source>local target name (optional)</source>
         <translation>Käännöskohteen nimi (valinnainen)</translation>
     </message>
 </context>

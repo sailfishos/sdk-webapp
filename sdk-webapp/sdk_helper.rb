@@ -1,7 +1,7 @@
 require './shell_process'
 require './providers.rb'
 require './targets.rb'
-require './toolchains.rb'
+require './toolings.rb'
 require './engine.rb'
 require './process.rb'
 require './flash.rb'
@@ -19,7 +19,8 @@ def _(*args)
   I18n.t(*args)
 end
 
-# initialize the Target class with data
+# initialize the Tooling and Target classes with data
+Tooling.load
 Target.load
 
 class SdkHelper < Sinatra::Base
@@ -31,7 +32,6 @@ class SdkHelper < Sinatra::Base
   end
 
   get '/' do redirect to "/"+system_language+"/targets/"; end
-  get '/toolchains/' do redirect to "/"+system_language+"/toolchains/"; end
   get '/targets/' do redirect to "/"+system_language+"/targets/"; end
   get '/updates/' do redirect to "/"+system_language+"/updates/"; end
   get '/register_sdk/' do redirect to "/"+system_language+"/register_sdk/"; end
@@ -124,34 +124,6 @@ class SdkHelper < Sinatra::Base
     redirect back
   end
 
-  get '/:locale/toolchains/?' do
-    locale_set
-    CCProcess.get_output
-    haml :toolchains, :locals => { :tab => :toolchains }
-  end
-
-# toolchains
-  post '/:locale/toolchains/:toolchain' do
-    toolchain = Toolchain.get(params[:toolchain])
-    toolchain.install
-    if toolchain
-      if toolchain.installed
-        Flash.to_user _("Toolchain %{toolchain} is already installed", toolchain: toolchain), :Flash.warning
-      else
-      end
-    else
-      Flash.to_user _("No toolchain called %{toolchain} is available", toolchain: toolchain)
-    end
-    redirect back
-  end
-
-  #remove toolchain - not supported at the moment by sdk
-  delete '/:locale/toolchains/:toolchain' do
-    toolchain = Toolchain.get(params[:toolchain])
-    toolchain.remove
-    redirect to('/'+params[:locale]+'/')
-  end
-
   #clear the operation progress output
   post '/actions/clear_output' do
     CCProcess.clear
@@ -164,10 +136,24 @@ class SdkHelper < Sinatra::Base
     redirect back
   end
 
+# toolings
+  #remove tooling
+  delete '/:locale/toolings/:tooling' do
+    Tooling.get(params[:tooling]).remove
+    redirect back
+  end
+
+  #update tooling
+  post '/:locale/toolings/:tooling/update' do
+    Tooling.get(params[:tooling]).update
+    redirect back
+  end
+
 # targets
   get '/:locale/targets/?' do
     if ! CCProcess.is_running
       # if a process is running, this is not useful
+      Tooling.load
       Target.load
     end
     locale_set
@@ -193,32 +179,29 @@ class SdkHelper < Sinatra::Base
       end
       t = Provider.targetTemplates[params[:template_id].to_i]
       url = t['url']
-      name = params[:local_template_name]
+      name = params[:local_target_name]
       name = t['name'] if name == ''
-      target_toolchain = t['toolchain']
+      tooling_url = t['tooling_url']
+      tooling_name = t['tooling_name']
+      toolchain = t['toolchain']
     else
       name = params[:target_name]
       url = params[:target_url]
-      target_toolchain = params[:target_toolchain]
-      if name == '' or url == '' or target_toolchain.to_i < 0
+      tooling_name = params[:tooling_name]
+      tooling_url = params[:tooling_url]
+      toolchain = params[:toolchain]
+      if name == '' or url == ''
         Flash.to_user _(:target_required_parameter_missing)
         redirect back
         return
       end
     end
 
-    if ! Toolchain.exists(target_toolchain) then
-      Flash.to_user _(:toolchain_not_available, toolchain: target_toolchain)
+    if ! Target.exists(name) then
+      target = Target.get(name)
+      target.create(url, tooling_name, tooling_url, toolchain)
     else
-      tc = Toolchain.get(target_toolchain)
-      if ! tc.installed
-        Flash.to_user _(:toolchain_not_installed, toolchain: target_toolchain)
-      elsif ! Target.exists(name) then
-        target = Target.get(name)
-        target.create(url, target_toolchain)
-      else
-        Flash.to_user _(:target_already_present, name: name)
-      end
+      Flash.to_user _(:target_already_present, name: name)
     end
     redirect back
   end
