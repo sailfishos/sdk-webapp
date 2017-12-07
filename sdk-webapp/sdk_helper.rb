@@ -298,12 +298,12 @@ class SdkHelper < Sinatra::Base
       @package_list = ($package_list or []) #FIXME: nil if can't read the list!
     end
 
-    def package_install(target, package)
-      CCProcess.start("sdk-manage --devel --install '#{target}' '#{package}'", (_ :installing_packages), 60*60)
+    def package_install(target, packages)
+      CCProcess.start("sdk-manage --devel --install '#{target}' #{packages}", (_ :installing_packages), 60*60)
     end
 
-    def package_remove(target, package)
-      CCProcess.start("sdk-manage --devel --remove '#{target}' '#{package}'", (_ :removing_packages), 60*60)
+    def package_remove(target, packages)
+      CCProcess.start("sdk-manage --devel --remove '#{target}' #{packages}", (_ :removing_packages), 60*60)
     end
   end
 
