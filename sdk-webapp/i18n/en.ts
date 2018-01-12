@@ -7,14 +7,14 @@
     <name>harbour_tools</name>
     <message>
         <source>harbour_tools</source>
-        <translation>Harbour Tools</translation>
+        <translation>Publishing Tools</translation>
     </message>
 </context>
 <context>
     <name>harbour_tool_updates</name>
     <message>
         <source>harbour_tools_updates</source>
-        <translation>Harbour tool updates are</translation>
+        <translation>Publishing tools updates are</translation>
     </message>
 </context>
 <context>
@@ -49,7 +49,7 @@
     <name>harbour_summary</name>
     <message>
         <source>harbour_summary</source>
-        <translation>This page contains tools relevant to Jolla Harbour.</translation>
+        <translation>This page contains tools useful for publishing Sailfish OS applications.</translation>
     </message>
 </context>
 <context>
@@ -63,14 +63,14 @@
     <name>rpm_validator_summary</name>
     <message>
         <source>rpm_validator_summary</source>
-        <translation>Use the RPM Validator tool to do a quick quality criteria check for your application package before sending it to Harbour for acceptance. The tool runs similar checks to the Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
+        <translation>Use the RPM Validator tool to do a quick quality criteria check for your application package before publishing it. The tool runs checks similar to the Jolla Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
     </message>
 </context>
 <context>
     <name>rpm_validator_disclaimer</name>
     <message>
         <source>rpm_validator_disclaimer</source>
-        <translation>DISCLAIMER: A successful result from the RPM Validator tool does not guarantee that your application is accepted to Harbour.</translation>
+        <translation>DISCLAIMER: Validation rules may vary in application stores. A successful result from the RPM Validator tool does not guarantee that your application is accepted to a particular application store.</translation>
     </message>
 </context>
 <context>
