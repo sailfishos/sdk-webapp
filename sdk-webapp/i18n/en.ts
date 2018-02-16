@@ -7,7 +7,7 @@
     <name>harbour_tools</name>
     <message>
         <source>harbour_tools</source>
-        <translation>Publishing Tools</translation>
+        <translation>Publishing</translation>
     </message>
 </context>
 <context>
