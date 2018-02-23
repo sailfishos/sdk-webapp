@@ -281,6 +281,9 @@ class SdkHelper < Sinatra::Base
       rescue CCProcess::Failed
       end
       Engine.reset_check_time
+      Tooling.each do |t|
+        t.reset_check_time if not t.nil?
+      end
       Target.each do |t|
         t.reset_check_time if not t.nil?
       end
