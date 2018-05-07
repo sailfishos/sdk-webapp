@@ -55,16 +55,16 @@
           %td{:style => "white-space: nowrap;"}
             - if tooling.update_available?
               %form{:action => "/#{@language}/toolings/#{tooling.name}/update", :method => "post"}
-                %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "t#{tooling.id}_update"}
-              %div.update_details{:id => "t#{tooling.id}_update_details"}
+                %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "tooling#{tooling.id}_update"}
+              %div.update_details{:id => "tooling#{tooling.id}_update_details"}
                 Update Details
                 %pre
                   = preserve do
                     :escaped
                       #{tooling.update_info}
                 :javascript
-                  $("#t#{tooling.id}_update").show_info($("#t#{tooling.id}_update_details"));
-                  $("#t#{tooling.id}_update_details").show_info($("#t#{tooling.id}_update_details"));
+                  $("#tooling#{tooling.id}_update").show_info($("#tooling#{tooling.id}_update_details"));
+                  $("#tooling#{tooling.id}_update_details").show_info($("#tooling#{tooling.id}_update_details"));
               .clear
             - else
               = _ "Uptodate"
@@ -75,16 +75,16 @@
             %td{:style => "white-space: nowrap;"}
               - if target.update_available?
                 %form{:action => "/#{@language}/targets/#{target.name}/update", :method => "post"}
-                  %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "t#{target.id}_update"}
-                %div.update_details{:id => "t#{target.id}_update_details"}
+                  %input{:type => "submit", :value => (_ :update), :class => "button", :name=> "_method", :id => "target#{target.id}_update"}
+                %div.update_details{:id => "target#{target.id}_update_details"}
                   Update Details
                   %pre
                     = preserve do
                       :escaped
                         #{target.update_info}
                   :javascript
-                    $("#t#{target.id}_update").show_info($("#t#{target.id}_update_details"));
-                    $("#t#{target.id}_update_details").show_info($("#t#{target.id}_update_details"));
+                    $("#target#{target.id}_update").show_info($("#target#{target.id}_update_details"));
+                    $("#target#{target.id}_update_details").show_info($("#target#{target.id}_update_details"));
                 .clear
               - else
                 = _ "Uptodate"
