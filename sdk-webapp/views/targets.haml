@@ -12,26 +12,36 @@
           %tr
             %td.tooling_name
               #{tooling.name}
+              - if tooling.installer_managed
+                = _(:installer_managed_mark)
             - if Target.all_using_tooling(tooling.name).empty?
-              %td.delete_button
-                %form{:action => "/#{@language}/toolings/#{tooling.name}", :method => "post"}
-                  %input{:type => "submit", :value => (_ :delete), :class => "button"}
-                  %input{:type => "hidden", :value => "delete", :name => "_method" }
+              - if ! tooling.installer_managed
+                %td.delete_button
+                  %form{:action => "/#{@language}/toolings/#{tooling.name}", :method => "post"}
+                    %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                    %input{:type => "hidden", :value => "delete", :name => "_method" }
           - Target.each_using_tooling(tooling.name) do |target|
             %tr
               %td.element_name
                 #{target.name}
+                - if target.installer_managed
+                  = _(:installer_managed_mark)
               %td.element_manage
                 %a.button.manage_link(href='/#{@language}/targets/#{target.name}')
                   = _(:manage)
-              %td.delete_button
-                %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
-                  %input{:type => "submit", :value => (_ :delete), :class => "button"}
-                  %input{:type => "hidden", :value => "delete", :name => "_method" }
+              - if ! target.installer_managed
+                %td.delete_button
+                  %form{:action => "/#{@language}/targets/#{target.name}", :method => "post"}
+                    %input{:type => "submit", :value => (_ :delete), :class => "button"}
+                    %input{:type => "hidden", :value => "delete", :name => "_method" }
               - if ! target.is_known
                 %td.upgrade_button
                   %form{:action => "/#{@language}/targets/#{target.name}/upgrade", :method => "post"}
                     %input{:type => "submit", :value => "sync", :class => "button"}
+
+  - if Tooling.all.any? {|t| t.installer_managed} || Target.all.any? {|t| t.installer_managed}
+    #target_footnote
+      = _(:target_footnote)
 
   #add_target_wrap
     .page_header

@@ -6,7 +6,7 @@ require './process.rb'
 # Refreshing is carried out by a systemd timer
 class Tooling
   include Enumerable
-  attr_accessor :name, :url
+  attr_accessor :name, :url, :installer_managed
   @@toolings=[]
   UPDATE_VALID_PERIOD=7200
 
@@ -82,7 +82,12 @@ class Tooling
   # Some class methods to handle iteration and save/load
 
   def self.load
-    @@toolings = CCProcess.complete("sdk-manage --tooling --list").lines.map{ |n| self.get(n.chomp) }
+    @@toolings = CCProcess.complete("sdk-manage --tooling --list --long").lines.map do |row|
+      name, mode = row.chomp.split
+      tooling = self.get(name)
+      tooling.installer_managed = mode == "installer"
+      tooling
+    end
   rescue CCProcess::Failed
     @@toolings = []
   end
