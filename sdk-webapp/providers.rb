@@ -37,7 +37,14 @@ class Provider
   def targetTemplates
     if _update_check_needed then
       begin
-        response = RestClient::Request.execute(method: :get, url: url, timeout: 2, open_timeout: 3)
+        response = ""
+        if url =~ /^file:\/\//
+          File.open(url[7..-1],"r") do |f|
+            response = f.read
+          end
+        else
+          response = RestClient::Request.execute(method: :get, url: url, timeout: 2, open_timeout: 3)
+        end
         # ignore comment lines
         response = response.split(/\r?\n/).select { |line| 
           line[0] != "#" and line[0..1] != "//"
