@@ -7,7 +7,6 @@ Group:      Development Platform/Platform SDK
 License:    GPLv2+
 URL:        https://github.com/sailfishos/sdk-webapp
 Source0:    %{name}-%{version}.tar.bz2
-Source100:  sdk-webapp.yaml
 Requires:   sdk-webapp-bundle >= 0.4.0
 Requires:   sdk-webapp-customization >= 0.4.0-2
 Requires:   sdk-utils >= 0.57
