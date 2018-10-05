@@ -456,6 +456,20 @@
     </message>
 </context>
 <context>
+    <name>installer_managed_mark</name>
+    <message>
+        <source>Installer managed mark</source>
+        <translation>*</translation>
+    </message>
+</context>
+<context>
+    <name>target_footnote</name>
+    <message>
+        <source>Target Footnote</source>
+        <translation>(*) Items managed by the SDK installer cannot be removed through the Control Centre</translation>
+    </message>
+</context>
+<context>
     <name>manage_targets</name>
     <message>
         <source>manage targets</source>

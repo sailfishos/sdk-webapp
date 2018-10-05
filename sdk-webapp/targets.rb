@@ -6,7 +6,7 @@ require './process.rb'
 # Refreshing is carried out by a systemd timer
 class Target
   include Enumerable
-  attr_accessor :name, :url, :tooling
+  attr_accessor :name, :url, :tooling, :installer_managed
   @@all_targets=[]
   @@targets=[]
   UPDATE_VALID_PERIOD=7200
@@ -97,9 +97,10 @@ class Target
 
   def self.load
     @@all_targets = CCProcess.complete("sdk-manage --target --list --long").lines.map do |row|
-      name, tooling = row.chomp.split
+      name, tooling, mode = row.chomp.split
       target = self.get(name)
       target.tooling = tooling
+      target.installer_managed = mode == "installer"
       target
     end
     @@targets = @@all_targets.keep_if {|t| t.is_known }
