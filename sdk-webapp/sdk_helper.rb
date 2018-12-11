@@ -19,9 +19,10 @@ def _(*args)
   I18n.t(*args)
 end
 
-# initialize the Tooling and Target classes with data
+# initialize the following classes with data
 Tooling.load
 Target.load
+Harbour.load
 
 class SdkHelper < Sinatra::Base
 
@@ -74,8 +75,13 @@ class SdkHelper < Sinatra::Base
       # + chars in filename have been converted to spaces, let's
       # convert them back
       fname = params[:rpm_name][:filename].tr(' ', '+')
-      File.rename(params[:rpm_name][:tempfile], Dir.tmpdir + "/" + fname)
-      Harbour.validate(Dir.tmpdir + "/" + fname, fname)
+      # use a path accessible to sb2
+      tmpdir = Dir.home + "/.cache/sdk-webapp"
+      FileUtils.mkpath(tmpdir)
+      File.rename(params[:rpm_name][:tempfile], tmpdir + "/" + fname)
+      target = params[:target]
+      suites = params[:suites][target]
+      Harbour.validate(tmpdir + "/" + fname, fname, target, suites)
     end
     redirect back
   end

@@ -373,7 +373,7 @@ input[disabled]
   border-radius: 8px
   box-shadow: 1px 1px 1px rgba(0,0,0,0.2)
 
-.button:hover
+.button:hover:enabled
   color: #1b2a44
 
 .styled_select select
@@ -477,3 +477,23 @@ input[disabled]
 .package_list_table_style
   padding-right: 10px
 
+fieldset
+  margin-top: 0.5em
+  margin-bottom: 1em
+  border: none
+  position: relative
+  padding-top: 1.5em
+
+fieldset legend
+  border: none
+  position: absolute
+  top: 0
+  left: 0
+  padding: 0
+
+.rpm_validator_no_suite
+  font-style: italic
+
+#rpm_validator_no_suite_selected
+  margin-top: 10px
+  font-style: italic
