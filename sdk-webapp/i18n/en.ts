@@ -63,7 +63,35 @@
     <name>rpm_validator_summary</name>
     <message>
         <source>rpm_validator_summary</source>
-        <translation>Use the RPM Validator tool to do a quick quality criteria check for your application package before publishing it. The tool runs checks similar to the Jolla Harbour package validation process and is automatically updated before each run if updates are enabled and available.</translation>
+        <translation>Use the RPM Validator tool to do a quick quality criteria check for your application package before publishing it.</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_target</name>
+    <message>
+        <source>rpm_validator_target</source>
+        <translation>Target Version</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_suites</name>
+    <message>
+        <source>rpm_validator_suites</source>
+        <translation>Validation Suite</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_no_suite</name>
+    <message>
+        <source>rpm_validator_no_suite</source>
+        <translation>No validation suite is available for this target version. Consider validating for one of the latest Sailfish OS targets instead.</translation>
+    </message>
+</context>
+<context>
+    <name>rpm_validator_no_suite_selected</name>
+    <message>
+        <source>rpm_validator_no_suite_selected</source>
+        <translation>At least one validation suite must be selected.</translation>
     </message>
 </context>
 <context>
