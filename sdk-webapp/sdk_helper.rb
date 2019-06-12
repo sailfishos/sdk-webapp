@@ -302,7 +302,7 @@ class SdkHelper < Sinatra::Base
 
     def packages_list_update
       @target = params[:target]
-      $package_list = @package_list = CCProcess.complete("sdk-manage --devel --list #@target").split.map {|line| line.split(',')}.map {|i,j| [i, j == 'i']}
+      $package_list = @package_list = CCProcess.complete("sdk-manage --devel --list #@target").split.map {|line| line.split(',')}.map {|i,j| [i, (j == 'i') || (j == "i+")]}
     rescue CCProcess::Failed
       @package_list = ($package_list or []) #FIXME: nil if can't read the list!
     end
